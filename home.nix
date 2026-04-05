@@ -23,7 +23,7 @@
 
   programs.git = {
     enable = true;
-    extraConfig = {
+    settings = {
       user.name = "queze1";
       user.email = "52340127+queze1@users.noreply.github.com";
       init.defaultBranch = "main";
