@@ -2,7 +2,7 @@
 {
   home.packages = [
     (pkgs.writeShellScriptBin "rebuild" ''
-      cd ~/.config/nix-on-droid/
+      cd ~/.config/nix-on-droid-config/
       git pull
       nix-on-droid switch --flake .
     '')
