@@ -53,7 +53,7 @@ enableUserAccounts: false
 enableDiscreetLogin: false
 perUserBasicAuth: false
 sso:
-  autheliaAuth: true
+  autheliaAuth: false
   authentikAuth: false
 hostWhitelist:
   enabled: false
