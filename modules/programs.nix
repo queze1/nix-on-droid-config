@@ -5,8 +5,10 @@
 
     # Basic utilities
     iproute2
+    killall
     nano
     ncurses
+    procps
     which
 
     sillytavern
