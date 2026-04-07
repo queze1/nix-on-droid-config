@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 {
   environment.packages = with pkgs; [
     openssh
@@ -12,7 +12,7 @@
     which
 
     sillytavern
-    vaultwarden
-    vaultwarden-webvault
+    pkgs-unstable.vaultwarden
+    pkgs-unstable.vaultwarden-webvault
   ];
 }

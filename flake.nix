@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -20,6 +21,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       home-manager,
       nix-on-droid,
     }:
@@ -35,6 +37,15 @@
           overlays = [
             nix-on-droid.overlays.default
           ];
+        };
+
+        extraOptions = {
+          pkgs-unstable = import nixpkgs-unstable {
+            system = "aarch64-linux";
+            overlays = [
+              nix-on-droid.overlays.default
+            ];
+          };
         };
 
         # Set path to home-manager flake
