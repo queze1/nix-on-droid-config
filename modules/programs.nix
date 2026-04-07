@@ -12,6 +12,7 @@
     which
 
     sillytavern
+    navidrome
     pkgs-unstable.vaultwarden
     pkgs-unstable.vaultwarden-webvault
   ];

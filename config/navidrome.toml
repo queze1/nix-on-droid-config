@@ -1,0 +1,9 @@
+# Music library
+MusicFolder = "~/Music"
+
+# Application data
+DataFolder = "~/.local/share/navidrome"
+
+# Server settings
+Address = "0.0.0.0"
+Port = 4533

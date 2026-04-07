@@ -39,6 +39,12 @@
     source = ./config/sillytavern.yaml;
   };
 
+  xdg.configfile.navidrome-config = {
+    enable = true;
+    target = "navidrome.toml";
+    source = ./config/navidrome.toml;
+  };
+
   services.syncthing = {
     enable = true;
   };
