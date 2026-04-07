@@ -5,8 +5,8 @@
 {
   imports = [ ./modules ];
 
-  user.uid = 10272;
-  user.gid = 10272;
+  user.uid = 10273;
+  user.gid = 10273;
 
   # Add openssh into PATH before activating
   build.activationBefore.sshPath = ''
