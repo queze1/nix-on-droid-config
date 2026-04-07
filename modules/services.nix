@@ -25,23 +25,23 @@ in
     $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.syncthing}/bin/syncthing >> "${logDirectory}/syncthing.log" 2>&1 &'
   '';
 
-  build.activation.vaultwarden = ''
-    $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
-    if ${pkgs.procps}/bin/pgrep -x vaultwarden > /dev/null; then
-      $VERBOSE_ECHO "Restarting Vaultwarden..."
-      $DRY_RUN_CMD ${pkgs.killall}/bin/killall -q vaultwarden || true
-    else
-      $VERBOSE_ECHO "Starting Vaultwarden..."
-    fi
+  # build.activation.vaultwarden = ''
+  #   $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
+  #   if ${pkgs.procps}/bin/pgrep -x vaultwarden > /dev/null; then
+  #     $VERBOSE_ECHO "Restarting Vaultwarden..."
+  #     $DRY_RUN_CMD ${pkgs.killall}/bin/killall -q vaultwarden || true
+  #   else
+  #     $VERBOSE_ECHO "Starting Vaultwarden..."
+  #   fi
 
-    # Environment variables
-    # export DOMAIN=https://vault.example.com
-    # export DATABASE_URL=sqlite:${config.user.home}/.local/share/vaultwarden/db.sqlite3
-    # export ROCKET_PORT=80
-    # export SIGNUPS_ALLOWED=false
-    # export SHOW_PASSWORD_HINT=false
-    $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.vaultwarden}/bin/vaultwarden >> "${logDirectory}/vaultwarden.log" 2>&1 &'
-  '';
+  #   # Environment variables
+  #   # export DOMAIN=https://vault.example.com
+  #   # export DATABASE_URL=sqlite:${config.user.home}/.local/share/vaultwarden/db.sqlite3
+  #   # export ROCKET_PORT=80
+  #   # export SIGNUPS_ALLOWED=false
+  #   # export SHOW_PASSWORD_HINT=false
+  #   $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.vaultwarden}/bin/vaultwarden >> "${logDirectory}/vaultwarden.log" 2>&1 &'
+  # '';
 
   build.activation.navidrome = ''
     $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
