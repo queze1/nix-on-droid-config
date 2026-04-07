@@ -13,5 +13,6 @@
 
     sillytavern
     vaultwarden
+    vaultwarden-webvault
   ];
 }
