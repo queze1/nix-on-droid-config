@@ -1,6 +1,7 @@
 { pkgs, config, ... }:
 let
   logDirectory = "${config.user.home}/.local/var/log";
+  musicDirectory = "${config.user.home}/Music";
 in
 {
   build.activation.sillytavern = ''
@@ -45,6 +46,7 @@ in
 
   build.activation.navidrome = ''
     $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
+    $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${musicDirectory}"
     if ${pkgs.procps}/bin/pgrep -x navidrome > /dev/null; then
       $VERBOSE_ECHO "Restarting Navidrome..."
       $DRY_RUN_CMD ${pkgs.killall}/bin/killall -q navidrome || true
