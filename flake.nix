@@ -39,7 +39,7 @@
           ];
         };
 
-        specialArgs = {
+        extraSpecialArgs = {
           pkgs-unstable = import nixpkgs-unstable {
             system = "aarch64-linux";
             overlays = [
