@@ -5,6 +5,9 @@
 {
   imports = [ ./modules ];
 
+  nix-on-droid.uid = 1000;
+  nix-on-droid.gid = 100;
+
   # Add openssh into PATH before activating
   build.activationBefore.sshPath = ''
     export PATH=$PATH:${pkgs.openssh}/bin
