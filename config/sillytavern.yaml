@@ -1,7 +1,7 @@
 dataRoot: ./data
 listen: true
 listenAddress:
-  ipv4: 100.0.0.0
+  ipv4: 0.0.0.0
   ipv6: "[::]"
 protocol:
   ipv4: true
