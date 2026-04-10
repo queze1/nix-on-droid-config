@@ -6,9 +6,9 @@ in
 {
   build.activation.sillytavern = ''
     $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
-    if ${pkgs.procps}/bin/pgrep -x sillytavern > /dev/null; then
+    if ${pkgs.procps}/bin/pgrep -x node > /dev/null; then
       echo "Restarting SillyTavern..."
-      $DRY_RUN_CMD ${pkgs.killall}/bin/killall -q sillytavern || true
+      $DRY_RUN_CMD ${pkgs.killall}/bin/killall -q node || true
     else
       echo "Starting SillyTavern..."
     fi
