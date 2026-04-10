@@ -1,6 +1,7 @@
 { pkgs, pkgs-unstable, ... }:
 {
   environment.packages = with pkgs; [
+    git
     openssh
 
     # Basic utilities
