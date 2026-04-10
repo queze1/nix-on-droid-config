@@ -12,10 +12,7 @@ in
     else
       echo "Starting SillyTavern..."
     fi
-
-    # Allow time for prevous instance to close
-    $DRY_RUN_CMD sleep 2
-
+    $DRY_RUN_CMD sleep 1
     $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.sillytavern}/bin/sillytavern >> "${logDirectory}/sillytavern.log" 2>&1 &'
   '';
 
@@ -27,6 +24,7 @@ in
     else
       echo "Starting Syncthing..."
     fi
+    $DRY_RUN_CMD sleep 1
     $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.syncthing}/bin/syncthing >> "${logDirectory}/syncthing.log" 2>&1 &'
   '';
 
@@ -57,6 +55,7 @@ in
     else
       echo "Starting Navidrome..."
     fi
+    $DRY_RUN_CMD sleep 1
     $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.navidrome}/bin/navidrome --configfile "${config.user.home}/.config/navidrome.toml" >> "${logDirectory}/navidrome.log" 2>&1 &'
   '';
 }
