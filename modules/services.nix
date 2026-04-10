@@ -49,9 +49,9 @@ in
   build.activation.navidrome = ''
     $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
     $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${musicDirectory}"
-    if ${pkgs.procps}/bin/pgrep -x navidrome > /dev/null; then
+    if ${pkgs.procps}/bin/pgrep -x .navidrome-wrap > /dev/null; then
       echo "Restarting Navidrome..."
-      $DRY_RUN_CMD ${pkgs.killall}/bin/killall -q navidrome || true
+      $DRY_RUN_CMD ${pkgs.killall}/bin/killall -q .navidrome-wrap || true
     else
       echo "Starting Navidrome..."
     fi
