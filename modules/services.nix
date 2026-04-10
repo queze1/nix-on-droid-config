@@ -12,6 +12,10 @@ in
     else
       echo "Starting SillyTavern..."
     fi
+
+    # Allow time for prevous instance to close
+    $DRY_RUN_CMD sleep 2
+
     $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.sillytavern}/bin/sillytavern >> "${logDirectory}/sillytavern.log" 2>&1 &'
   '';
 
