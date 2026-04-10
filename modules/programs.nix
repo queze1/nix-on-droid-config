@@ -11,7 +11,7 @@
     procps
     which
 
-    sillytavern
+    pkgs-unstable.sillytavern
     navidrome
     pkgs-unstable.vaultwarden
     pkgs-unstable.vaultwarden-webvault
