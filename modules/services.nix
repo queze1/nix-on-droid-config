@@ -2,6 +2,7 @@
 let
   logDirectory = "${config.user.home}/.local/var/log";
   musicDirectory = "${config.user.home}/Music";
+  vaultwardenDataDirectory = "${config.user.home}/.local/share/vaultwarden";
 in
 {
   build.activation.sillytavern = ''
@@ -28,23 +29,25 @@ in
     $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.syncthing}/bin/syncthing >> "${logDirectory}/syncthing.log" 2>&1 &'
   '';
 
-  # build.activation.vaultwarden = ''
-  #   $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
-  #   if ${pkgs.procps}/bin/pgrep -x vaultwarden > /dev/null; then
-  #     $VERBOSE_ECHO "Restarting Vaultwarden..."
-  #     $DRY_RUN_CMD ${pkgs.killall}/bin/killall -q vaultwarden || true
-  #   else
-  #     $VERBOSE_ECHO "Starting Vaultwarden..."
-  #   fi
-
-  #   # Environment variables
-  #   # export DOMAIN=https://vault.example.com
-  #   # export DATABASE_URL=sqlite:${config.user.home}/.local/share/vaultwarden/db.sqlite3
-  #   # export ROCKET_PORT=80
-  #   # export SIGNUPS_ALLOWED=false
-  #   # export SHOW_PASSWORD_HINT=false
-  #   $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.vaultwarden}/bin/vaultwarden >> "${logDirectory}/vaultwarden.log" 2>&1 &'
-  # '';
+  build.activation.vaultwarden = ''
+    $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
+    $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${vaultwardenDataDirectory}"
+    if ${pkgs.procps}/bin/pgrep -x vaultwarden > /dev/null; then
+      echo "Restarting Vaultwarden..."
+      $DRY_RUN_CMD ${pkgs.killall}/bin/killall -q vaultwarden || true
+    else
+      echo "Starting Vaultwarden..."
+    fi
+    $DRY_RUN_CMD sleep 1
+    $DRY_RUN_CMD ${pkgs.runtimeShell} -lc '
+      export DATA_FOLDER="${vaultwardenDataDirectory}"
+      export WEB_VAULT_FOLDER="${pkgs.vaultwarden-webvault}/share/vaultwarden/vault"
+      export ROCKET_ADDRESS="0.0.0.0"
+      export ROCKET_PORT="8080"
+      export SIGNUPS_ALLOWED="false"
+      export SHOW_PASSWORD_HINT="false"
+      nohup ${pkgs.vaultwarden}/bin/vaultwarden >> "${logDirectory}/vaultwarden.log" 2>&1 &'
+  '';
 
   build.activation.navidrome = ''
     $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
