@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  config,
+  ...
+}:
 let
   logDirectory = "${config.user.home}/.local/var/log";
   musicDirectory = "${config.user.home}/Music";
@@ -14,7 +19,7 @@ in
       echo "Starting SillyTavern..."
     fi
     $DRY_RUN_CMD sleep 1
-    $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.sillytavern}/bin/sillytavern >> "${logDirectory}/sillytavern.log" 2>&1 &'
+    $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs-unstable.sillytavern}/bin/sillytavern >> "${logDirectory}/sillytavern.log" 2>&1 &'
   '';
 
   build.activation.syncthing = ''
@@ -41,12 +46,12 @@ in
     $DRY_RUN_CMD sleep 1
     $DRY_RUN_CMD ${pkgs.runtimeShell} -lc '
       export DATA_FOLDER="${vaultwardenDataDirectory}"
-      export WEB_VAULT_FOLDER="${pkgs.vaultwarden-webvault}/share/vaultwarden/vault"
+      export WEB_VAULT_FOLDER="${pkgs-unstable.vaultwarden-webvault}/share/vaultwarden/vault"
       export ROCKET_ADDRESS="0.0.0.0"
       export ROCKET_PORT="8080"
       export SIGNUPS_ALLOWED="false"
       export SHOW_PASSWORD_HINT="false"
-      nohup ${pkgs.vaultwarden}/bin/vaultwarden >> "${logDirectory}/vaultwarden.log" 2>&1 &'
+      nohup ${pkgs-unstable.vaultwarden}/bin/vaultwarden >> "${logDirectory}/vaultwarden.log" 2>&1 &'
   '';
 
   build.activation.navidrome = ''
