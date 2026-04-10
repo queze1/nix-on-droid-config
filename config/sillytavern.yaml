@@ -121,7 +121,7 @@ extensions:
     speechToText: Xenova/whisper-small
     textToSpeech: Xenova/speecht5_tts
 git:
-  backend: auto
+  backend: builtin
 enableDownloadableTokenizers: true
 promptPlaceholder: "[Start a new chat]"
 openai:
