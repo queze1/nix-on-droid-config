@@ -7,10 +7,10 @@ in
   build.activation.sillytavern = ''
     $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
     if ${pkgs.procps}/bin/pgrep -x sillytavern > /dev/null; then
-      $VERBOSE_ECHO "Restarting SillyTavern..."
+      echo "Restarting SillyTavern..."
       $DRY_RUN_CMD ${pkgs.killall}/bin/killall -q sillytavern || true
     else
-      $VERBOSE_ECHO "Starting SillyTavern..."
+      echo "Starting SillyTavern..."
     fi
     $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.sillytavern}/bin/sillytavern >> "${logDirectory}/sillytavern.log" 2>&1 &'
   '';
@@ -18,10 +18,10 @@ in
   build.activation.syncthing = ''
     $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
     if ${pkgs.procps}/bin/pgrep -x syncthing > /dev/null; then
-      $VERBOSE_ECHO "Restarting Syncthing..."
+      echo "Restarting Syncthing..."
       $DRY_RUN_CMD ${pkgs.killall}/bin/killall -q syncthing || true
     else
-      $VERBOSE_ECHO "Starting Syncthing..."
+      echo "Starting Syncthing..."
     fi
     $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.syncthing}/bin/syncthing >> "${logDirectory}/syncthing.log" 2>&1 &'
   '';
@@ -48,10 +48,10 @@ in
     $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
     $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${musicDirectory}"
     if ${pkgs.procps}/bin/pgrep -x navidrome > /dev/null; then
-      $VERBOSE_ECHO "Restarting Navidrome..."
+      echo "Restarting Navidrome..."
       $DRY_RUN_CMD ${pkgs.killall}/bin/killall -q navidrome || true
     else
-      $VERBOSE_ECHO "Starting Navidrome..."
+      echo "Starting Navidrome..."
     fi
     $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.navidrome}/bin/navidrome --configfile "${config.user.home}/.config/navidrome.toml" >> "${logDirectory}/navidrome.log" 2>&1 &'
   '';
