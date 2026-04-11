@@ -2,13 +2,14 @@
 This repository contains my [nix-on-droid](https://github.com/nix-community/nix-on-droid) server configuration. It leverages [Tailscale](https://tailscale.com/) to securely connect to other devices.
 
 ## Services
+- [VaultWarden](https://github.com/dani-garcia/vaultwarden) - A self-hosted, open-source password manager.
 - [NaviDrome](https://www.navidrome.org/) - A self-hosted, open source music server and streamer.
 - [SillyTavern](https://docs.sillytavern.app/) - An open-source LLM frontend.
 
 ## Highlights
 - Declarative server configuration using [flakes](https://wiki.nixos.org/wiki/Flakes) and [Home Manager](https://github.com/nix-community/home-manager).
 - File synchronisation with [Syncthing](https://syncthing.net/).
-- Remote building with Nix
+- Remote building with Nix.
 
 ## Hosts
 
