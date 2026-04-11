@@ -8,6 +8,8 @@ let
   logDirectory = "${config.user.home}/.local/var/log";
   musicDirectory = "${config.user.home}/Music";
   vaultwardenDataDirectory = "${config.user.home}/.local/share/vaultwarden";
+  filebrowserDataDirectory = "${config.user.home}/.local/share/filebrowser";
+  filebrowserDatabase = "${filebrowserDataDirectory}/filebrowser.db";
 in
 {
   build.activation.sillytavern = ''
@@ -65,5 +67,36 @@ in
     fi
     $DRY_RUN_CMD sleep 1
     $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.navidrome}/bin/navidrome --configfile "${config.user.home}/.config/navidrome.toml" >> "${logDirectory}/navidrome.log" 2>&1 &'
+  '';
+
+  build.activation.filebrowser = ''
+    $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
+    $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${musicDirectory}"
+    $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${filebrowserDataDirectory}"
+
+    if [ ! -f "${filebrowserDatabase}" ]; then
+      echo "Bootstrapping File Browser admin user (username: admin)..."
+      $DRY_RUN_CMD ${pkgs.filebrowser}/bin/filebrowser \
+        --database "${filebrowserDatabase}" \
+        --root "${musicDirectory}" \
+        users add admin change-me \
+        --perm.admin
+      echo "File Browser admin password is set to 'change-me'. Change it after first login."
+    fi
+
+    if ${pkgs.procps}/bin/pgrep -x filebrowser > /dev/null; then
+      echo "Restarting File Browser..."
+      $DRY_RUN_CMD ${pkgs.killall}/bin/killall -q filebrowser || true
+    else
+      echo "Starting File Browser..."
+    fi
+    $DRY_RUN_CMD sleep 1
+    $DRY_RUN_CMD ${pkgs.runtimeShell} -lc '
+      nohup ${pkgs.filebrowser}/bin/filebrowser \
+        --address 127.0.0.1 \
+        --port 8081 \
+        --database "${filebrowserDatabase}" \
+        --root "${musicDirectory}" \
+        >> "${logDirectory}/filebrowser.log" 2>&1 &'
   '';
 }

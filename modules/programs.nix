@@ -13,6 +13,7 @@
     which
 
     pkgs-unstable.sillytavern
+    filebrowser
     navidrome
     pkgs-unstable.vaultwarden
     pkgs-unstable.vaultwarden-webvault
