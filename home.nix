@@ -8,6 +8,10 @@
     '')
   ];
 
+  home.file.".ssh/environment".text = ''
+    PATH=/data/data/com.termux.nix/files/home/.nix-profile/bin:/data/data/com.termux.nix/files/usr/bin:/bin
+  '';
+
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;

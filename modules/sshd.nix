@@ -20,7 +20,7 @@ in
     fi
 
     $VERBOSE_ECHO "Writing sshd_config..."
-    $DRY_RUN_CMD echo -e "HostKey ${sshdDirectory}/ssh_host_ed25519_key\nPort ${toString port}\nPubkeyAuthentication yes\nAuthenticationMethods publickey\nAuthorizedKeysFile ${config.user.home}/.ssh/authorized_keys\nStrictModes no\nPasswordAuthentication no\nKbdInteractiveAuthentication no\nChallengeResponseAuthentication no\nUsePAM no\n" > "${sshdDirectory}/sshd_config"
+    $DRY_RUN_CMD echo -e "HostKey ${sshdDirectory}/ssh_host_ed25519_key\nPort ${toString port}\nPubkeyAuthentication yes\nAuthenticationMethods publickey\nAuthorizedKeysFile ${config.user.home}/.ssh/authorized_keys\nStrictModes no\nPasswordAuthentication no\nKbdInteractiveAuthentication no\nChallengeResponseAuthentication no\nUsePAM no\nPermitUserEnvironment yes\n" > "${sshdDirectory}/sshd_config"
 
     # Kill any existing sshd processes
     if ${pkgs.procps}/bin/pgrep -x sshd > /dev/null; then
