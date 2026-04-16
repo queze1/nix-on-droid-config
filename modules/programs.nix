@@ -4,6 +4,9 @@
     git
     openssh
 
+    # Init manager
+    runit
+
     # Basic utilities
     iproute2
     killall
