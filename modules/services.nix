@@ -1,10 +1,39 @@
 {
+  self,
   pkgs,
   pkgs-unstable,
   config,
   ...
 }:
 let
+  serviceDirectory = "${self}/services";
+
+  # let
+  #   # Define where you want your actual log files to sit (must be writable!)
+  #   logDir = "/data/data/com.termux/files/home/.local/share/logs";
+
+  #   serviceDirectory = pkgs.runCommand "my-runit-services" {} ''
+  #     mkdir -p $out/sillytavern/log
+
+  #     # 1. The main app 'run' script
+  #     # Note: 'exec 2>&1' is vital so that errors are also sent to the logger
+  #     echo "#!/bin/sh" > $out/sillytavern/run
+  #     echo "exec 2>&1" >> $out/sillytavern/run
+  #     echo "exec ${pkgs.sillytavern}/bin/sillytavern" >> $out/sillytavern/run
+  #     chmod +x $out/sillytavern/run
+
+  #     # 2. The logger 'run' script
+  #     # We create the log folder if it doesn't exist, then start svlogd
+  #     echo "#!/bin/sh" > $out/sillytavern/log/run
+  #     echo "mkdir -p ${logDir}/sillytavern" >> $out/sillytavern/log/run
+  #     echo "exec ${pkgs.runit}/bin/svlogd -tt ${logDir}/sillytavern" >> $out/sillytavern/log/run
+  #     chmod +x $out/sillytavern/log/run
+  #   '';
+  # in
+  # {
+  #   # ... your activation script remains the same, pointing to serviceDirectory
+  # }
+
   logDirectory = "${config.user.home}/.local/var/log";
   musicDirectory = "${config.user.home}/Music";
   vaultwardenDataDirectory = "${config.user.home}/.local/share/vaultwarden";
@@ -12,6 +41,13 @@ let
   filebrowserDatabase = "${filebrowserDataDirectory}/filebrowser.db";
 in
 {
+  build.activation.runsvdir = ''
+    if ${pkgs.procps}/bin/pgrep -x runsvdir > /dev/null; then
+      echo "Starting runsvdir..."
+      $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.runit}/bin/runsvdir ${serviceDirectory} 2>&1 &'
+    fi
+  '';
+
   build.activation.sillytavern = ''
     $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
     if ${pkgs.procps}/bin/pgrep -x node > /dev/null; then
