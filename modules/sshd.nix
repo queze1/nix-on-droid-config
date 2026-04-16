@@ -20,8 +20,8 @@ in
     fi
 
     # Set environment in non-interactive SSH
-    $DRY_RUN_CMD echo "PATH=/data/data/com.termux.nix/files/home/.nix-profile/bin" > "${config.user.home}/.ssh/environment"
-    $DRY_RUN_CMD chmod $VERBOSE_ARG 600 "${config.user.home}/.ssh/environment
+    $DRY_RUN_CMD echo -e "PATH=/data/data/com.termux.nix/files/home/.nix-profile/bin" > "${config.user.home}/.ssh/environment"
+    $DRY_RUN_CMD chmod $VERBOSE_ARG 600 "${config.user.home}/.ssh/environment"
 
     $VERBOSE_ECHO "Writing sshd_config..."
     $DRY_RUN_CMD echo -e "HostKey ${sshdDirectory}/ssh_host_ed25519_key\nPort ${toString port}\nPubkeyAuthentication yes\nAuthenticationMethods publickey\nAuthorizedKeysFile ${config.user.home}/.ssh/authorized_keys\nStrictModes no\nPasswordAuthentication no\nKbdInteractiveAuthentication no\nChallengeResponseAuthentication no\nUsePAM no\nPermitUserEnvironment yes\n" > "${sshdDirectory}/sshd_config"
