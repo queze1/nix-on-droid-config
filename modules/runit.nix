@@ -22,13 +22,14 @@ let
 
   cfg = config.services.runit;
   enabledServices = lib.filterAttrs (_: s: s.enable) cfg.services;
+  enabledServiceNames = builtins.attrNames enabledServices;
 
   mkRunScript =
     name: svc:
     pkgs.writeShellScript "runit-${name}-run" ''
       set -eu
       exec 2>&1
-      exec ${svc.run}
+      ${svc.run}
     '';
 
   mkFinishScript =
@@ -49,17 +50,22 @@ let
   mkServiceActivation = name: svc: ''
     mkdir -p ${escapeShellArg "${cfg.serviceDir}/${name}"}
     ln -sfn ${mkRunScript name svc} ${escapeShellArg "${cfg.serviceDir}/${name}/run"}
-    chmod +x ${escapeShellArg "${cfg.serviceDir}/${name}/run"}
+
+    ${optionalString (svc.finish == "") ''
+      rm -f ${escapeShellArg "${cfg.serviceDir}/${name}/finish"}
+    ''}
 
     ${optionalString (svc.finish != "") ''
       ln -sfn ${mkFinishScript name svc} ${escapeShellArg "${cfg.serviceDir}/${name}/finish"}
-      chmod +x ${escapeShellArg "${cfg.serviceDir}/${name}/finish"}
+    ''}
+
+    ${optionalString (!svc.log.enable) ''
+      rm -rf ${escapeShellArg "${cfg.serviceDir}/${name}/log"}
     ''}
 
     ${optionalString svc.log.enable ''
       mkdir -p ${escapeShellArg "${cfg.serviceDir}/${name}/log"}
       ln -sfn ${mkLogRunScript name} ${escapeShellArg "${cfg.serviceDir}/${name}/log/run"}
-      chmod +x ${escapeShellArg "${cfg.serviceDir}/${name}/log/run"}
     ''}
   '';
 
@@ -71,13 +77,13 @@ in
     serviceDir = mkOption {
       type = types.str;
       default = "${config.user.home}/.local/state/runit/services";
-      description = "Writable runit service directory watched by runsvdir.";
+      description = "Runit service directory";
     };
 
     logDir = mkOption {
       type = types.str;
       default = "${config.user.home}/.local/var/log/services";
-      description = "Root directory for svlogd per-service logs.";
+      description = "Runit log directory";
     };
 
     services = mkOption {
@@ -92,12 +98,12 @@ in
               };
               run = mkOption {
                 type = types.lines;
-                description = "Command/script body executed by runit run script.";
+                description = "Runit run script.";
               };
               finish = mkOption {
                 type = types.lines;
                 default = "";
-                description = "Optional finish script body.";
+                description = "Optional runit finish script.";
               };
               log.enable = mkOption {
                 type = types.bool;
@@ -115,6 +121,20 @@ in
     build.activation.runitServices = ''
       $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.serviceDir}
       $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.logDir}
+
+      # Clean up unused services
+      for path in ${escapeShellArg cfg.serviceDir}/*; do
+        [ -e "$path" ] || continue
+        name=$(basename "$path")
+        case " ${concatStringsSep " " enabledServiceNames} " in
+          *" $name "*)
+            ;;
+          *)
+            $DRY_RUN_CMD rm $VERBOSE_ARG --recursive --force "$path"
+            $DRY_RUN_CMD rm $VERBOSE_ARG --recursive --force ${escapeShellArg cfg.logDir}/"$name"
+            ;;
+        esac
+      done
 
       ${concatStringsSep "\n" (mapAttrsToList mkServiceActivation enabledServices)}
     '';
