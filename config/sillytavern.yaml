@@ -25,8 +25,8 @@ enableForwardedWhitelist: false
 whitelist:
   - ::1
   - 127.0.0.1
-  - 100.95.108.111
-  - 100.117.43.41
+  - 100.64.0.0/10        # Tailscale IPv4 range
+  - fd7a:115c:a1e0::/48  # Tailscale IPv6 range
 whitelistDockerHosts: false
 basicAuthMode: false
 basicAuthUser:
