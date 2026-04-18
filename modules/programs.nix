@@ -15,10 +15,11 @@
     procps
     which
 
-    pkgs-unstable.sillytavern
     filebrowser
     navidrome
+    pkgs-unstable.sillytavern
     pkgs-unstable.vaultwarden
     pkgs-unstable.vaultwarden-webvault
+    syncthing
   ];
 }

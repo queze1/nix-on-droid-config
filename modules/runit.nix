@@ -48,6 +48,7 @@ let
     '';
 
   mkServiceActivation = name: svc: ''
+    echo "Adding runit service ${name}..."
     mkdir -p ${escapeShellArg "${cfg.serviceDir}/${name}"}
     ln -sfn ${mkRunScript name svc} ${escapeShellArg "${cfg.serviceDir}/${name}/run"}
 
@@ -130,6 +131,7 @@ in
           *" $name "*)
             ;;
           *)
+            echo "Cleaning up runit service $name..."
             $DRY_RUN_CMD rm $VERBOSE_ARG --recursive --force "$path"
             $DRY_RUN_CMD rm $VERBOSE_ARG --recursive --force ${escapeShellArg cfg.logDir}/"$name"
             ;;
