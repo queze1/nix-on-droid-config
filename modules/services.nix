@@ -12,6 +12,10 @@ let
   filebrowserDatabase = "${filebrowserDataDirectory}/filebrowser.db";
 in
 {
+  services.runit = {
+    enable = true;
+  };
+
   # build.activation.sillytavern = ''
   #   $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${logDirectory}"
   #   if ${pkgs.procps}/bin/pgrep -x node > /dev/null; then
