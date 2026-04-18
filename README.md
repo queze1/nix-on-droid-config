@@ -1,5 +1,5 @@
 # nix-on-droid-config
-This repository contains my [nix-on-droid](https://github.com/nix-community/nix-on-droid) server configuration. It leverages [Tailscale](https://tailscale.com/) to securely connect to other devices.
+This repository contains my [nix-on-droid](https://github.com/nix-community/nix-on-droid) server configuration. It uses [Tailscale](https://tailscale.com/) to securely connect to other devices.
 
 ## Services
 - [VaultWarden](https://github.com/dani-garcia/vaultwarden) - A self-hosted, open-source password manager.
@@ -8,6 +8,7 @@ This repository contains my [nix-on-droid](https://github.com/nix-community/nix-
 - [File Browser](https://filebrowser.org/) - A web file manager.
 
 ## Highlights
+- Service management with [runit](https://smarden.org/runit/).
 - Declarative server configuration using [flakes](https://wiki.nixos.org/wiki/Flakes) and [Home Manager](https://github.com/nix-community/home-manager).
 - File synchronisation with [Syncthing](https://syncthing.net/).
 - Remote building with Nix.
