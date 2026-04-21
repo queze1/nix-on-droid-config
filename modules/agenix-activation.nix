@@ -8,11 +8,6 @@
   };
 
   config = {
-    # Tell agenix where to find SSH keys
-    age.identityPaths = [
-      "${config.user.home}/.ssh/id_ed25519"
-    ];
-
     # Use build.activation instead of systemd
     build.activation.agenix = ''
       $VERBOSE_ECHO "Decrypting secrets with agenix..."

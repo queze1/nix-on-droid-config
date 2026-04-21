@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home.packages = [
     (pkgs.writeShellScriptBin "rebuild" ''
@@ -57,6 +57,11 @@
     target = "navidrome.toml";
     source = ./config/navidrome.toml;
   };
+
+  # Tell agenix where to find SSH keys
+  age.identityPaths = [
+    "${config.user.home}/.ssh/id_ed25519"
+  ];
 
   # Read the changelog before changing this value
   home.stateVersion = "24.05";
