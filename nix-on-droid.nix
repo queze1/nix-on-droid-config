@@ -1,5 +1,6 @@
 {
   pkgs,
+  agenix,
   ...
 }:
 {
@@ -21,6 +22,7 @@
     config = ./home.nix;
     backupFileExtension = "hm-bak";
     useGlobalPkgs = true;
+    sharedModules = [ agenix.homeManagerModules.default ];
   };
 
   # Set time zone
