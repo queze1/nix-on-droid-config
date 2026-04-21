@@ -15,11 +15,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -29,13 +24,11 @@
       nixpkgs-unstable,
       home-manager,
       nix-on-droid,
-      sops-nix,
     }:
     {
       nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
         modules = [
           ./nix-on-droid.nix
-          sops-nix.nixosModules.sops
         ];
 
         # Set nixpkgs instance
