@@ -68,9 +68,11 @@
     identityPaths = [
       "${config.user.home}/.ssh/id_ed25519"
     ];
-    cloudflare-tunnel-token = {
-      file = ../secrets/cloudflare-tunnel-token.age;
-      path = "/etc/cloudflare-tunnel-token";
+    secrets = {
+      cloudflare-tunnel-token = {
+        file = ../secrets/cloudflare-tunnel-token.age;
+        path = "/etc/cloudflare-tunnel-token";
+      };
     };
   };
 
