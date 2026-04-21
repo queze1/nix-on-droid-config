@@ -10,7 +10,7 @@
   config = {
     # Tell agenix where to find SSH keys
     age.identityPaths = [
-      "${config.home.homeDirectory}/.ssh/id_ed25519"
+      "${config.user.home}/.ssh/id_ed25519"
     ];
 
     # Use build.activation instead of systemd
