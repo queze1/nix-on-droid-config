@@ -17,6 +17,7 @@
 
     # Services
     caddy
+    cloudflared
     filebrowser
     navidrome
     pkgs-unstable.sillytavern

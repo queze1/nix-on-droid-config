@@ -14,6 +14,13 @@ in
   services.runit = {
     enable = true;
 
+    services.cloudflared = {
+      enable = true;
+      run = ''
+        exec ${pkgs.cloudflared}/bin/cloudflared tunnel run --token ${config.age.secrets.cloudflare-tunnel-token}
+      '';
+    };
+
     services.sillytavern = {
       enable = true;
       run = ''
