@@ -14,23 +14,17 @@ in
   services.runit = {
     enable = true;
 
-    services.filebrowser = {
+    services.sillytavern = {
       enable = true;
       run = ''
-        mkdir -p ${filebrowserDataDirectory}
-        exec ${pkgs.filebrowser}/bin/filebrowser \
-          --address 0.0.0.0 \
-          --port 8081 \
-          --database "${filebrowserDatabase}" \
-          --root "${musicDirectory}"
+        exec ${pkgs-unstable.sillytavern}/bin/sillytavern
       '';
     };
 
-    services.navidrome = {
+    services.syncthing = {
       enable = true;
       run = ''
-        mkdir -p ${musicDirectory}
-        exec ${pkgs.navidrome}/bin/navidrome --configfile "${config.user.home}/.config/navidrome.toml"
+        exec ${pkgs.syncthing}/bin/syncthing
       '';
     };
 
@@ -48,24 +42,23 @@ in
       '';
     };
 
-    services.picard = {
+    services.navidrome = {
       enable = true;
       run = ''
-        exec ${pkgs.picard} ${musicDirectory} 
+        mkdir -p ${musicDirectory}
+        exec ${pkgs.navidrome}/bin/navidrome --configfile "${config.user.home}/.config/navidrome.toml"
       '';
     };
 
-    services.sillytavern = {
+    services.filebrowser = {
       enable = true;
       run = ''
-        exec ${pkgs-unstable.sillytavern}/bin/sillytavern
-      '';
-    };
-
-    services.syncthing = {
-      enable = true;
-      run = ''
-        exec ${pkgs.syncthing}/bin/syncthing
+        mkdir -p ${filebrowserDataDirectory}
+        exec ${pkgs.filebrowser}/bin/filebrowser \
+          --address 0.0.0.0 \
+          --port 8081 \
+          --database "${filebrowserDatabase}" \
+          --root "${musicDirectory}"
       '';
     };
   };

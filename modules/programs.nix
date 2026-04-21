@@ -17,7 +17,6 @@
 
     filebrowser
     navidrome
-    picard
     pkgs-unstable.sillytavern
     pkgs-unstable.vaultwarden
     pkgs-unstable.vaultwarden-webvault
