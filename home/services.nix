@@ -17,7 +17,7 @@ in
     services.cloudflared = {
       enable = true;
       run = ''
-        exec ${pkgs.cloudflared}/bin/cloudflared tunnel run --token ${config.age.secrets.cloudflare-tunnel-token}
+        exec ${pkgs.cloudflared}/bin/cloudflared tunnel run --token ${config.age.secrets.cloudflare-tunnel-token.path}
       '';
     };
 
