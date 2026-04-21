@@ -1,32 +1,18 @@
-{ lib, ... }:
+{ config, lib, ... }:
 {
   options = {
     systemd.user.services = lib.mkOption {
       type = lib.types.attrsOf lib.types.unspecified;
       default = { };
     };
-
-    systemd.sysusers = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-    };
-
-    services.openssh = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-    };
-
-    services.userborn = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-    };
   };
 
-  config = { };
+  config = {
+    config = lib.mkIf (config.secrets != { }) {
+      build.activation.agenix = ''
+        $VERBOSE_ECHO "Decrypting secrets with agenix..."
+        $DRY_RUN_CMD ${config.systemd.user.services.agenix.Service.ExecStart}
+      '';
+    };
+  };
 }
