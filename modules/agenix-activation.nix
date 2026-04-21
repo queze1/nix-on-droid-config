@@ -3,7 +3,11 @@
   options = {
     systemd.user.services = lib.mkOption {
       type = lib.types.attrsOf lib.types.unspecified;
-      default = { };
+      default = {
+        agenix = {
+          Service.ExecStart = "";
+        };
+      };
     };
   };
 
