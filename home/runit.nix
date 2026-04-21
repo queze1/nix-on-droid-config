@@ -119,7 +119,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.activation.runitServices = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    home.activation.runitServices = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
       $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.serviceDir}
       $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.logDir}
 
