@@ -8,6 +8,23 @@
     '')
   ];
 
+  programs.git = {
+    enable = true;
+    settings = {
+      user.name = "queze1";
+      user.email = "52340127+queze1@users.noreply.github.com";
+      init.defaultBranch = "main";
+      push = {
+        autoSetupRemote = "true";
+      };
+    };
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
@@ -30,18 +47,6 @@
         user = "remotebuild";
         identityFile = "/data/data/com.termux.nix/files/home/.ssh/id_ed25519";
         identitiesOnly = true;
-      };
-    };
-  };
-
-  programs.git = {
-    enable = true;
-    settings = {
-      user.name = "queze1";
-      user.email = "52340127+queze1@users.noreply.github.com";
-      init.defaultBranch = "main";
-      push = {
-        autoSetupRemote = "true";
       };
     };
   };
