@@ -1,18 +1,17 @@
 { pkgs, pkgs-unstable, ... }:
 {
   environment.packages = with pkgs; [
-    git
-    openssh
-
     # Init manager
     runit
 
     # Basic utilities
     curlMinimal
+    git
     iproute2
     killall
     nano
     ncurses
+    openssh
     procps
     which
 
