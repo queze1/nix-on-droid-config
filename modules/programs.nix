@@ -16,7 +16,6 @@
     procps
     which
 
-    # Services
     caddy
     filebrowser
     navidrome
