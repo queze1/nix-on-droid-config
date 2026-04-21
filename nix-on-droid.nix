@@ -9,7 +9,7 @@
   user.uid = 10273;
   user.gid = 10273;
 
-  environment.systemPackages = [ agenix.packages.aarch64-linux.default ];
+  environment.packages = [ agenix.packages.aarch64-linux.default ];
 
   # Add tools to activation PATH
   build.activationBefore.extendPath = ''
