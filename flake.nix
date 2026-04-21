@@ -36,7 +36,6 @@
       nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
         modules = [
           ./nix-on-droid.nix
-          agenix.nixosModules.default
         ];
 
         # Set nixpkgs instance
@@ -59,6 +58,7 @@
 
         # Set path to home-manager flake
         home-manager-path = home-manager.outPath;
+        home-manager.sharedModules = [ agenix.homeManagerModules.default ];
       };
     };
 }
