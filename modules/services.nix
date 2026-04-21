@@ -51,7 +51,7 @@ in
     services.picard = {
       enable = true;
       run = ''
-        exec ${pkgs.picard}/bin/picard ${musicDirectory} 
+        exec ${pkgs.picard} ${musicDirectory} 
       '';
     };
 
