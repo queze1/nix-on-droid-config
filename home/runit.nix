@@ -77,13 +77,13 @@ in
 
     serviceDir = mkOption {
       type = types.str;
-      default = "${config.user.home}/.local/state/runit/services";
+      default = "${config.home.homeDirectory}/.local/state/runit/services";
       description = "Runit service directory";
     };
 
     logDir = mkOption {
       type = types.str;
-      default = "${config.user.home}/.local/var/log/services";
+      default = "${config.home.homeDirectory}/.local/var/log/services";
       description = "Runit log directory";
     };
 
@@ -119,7 +119,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    build.activation.runitServices = ''
+    home.activation.runitServices = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.serviceDir}
       $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.logDir}
 
@@ -141,7 +141,7 @@ in
       ${concatStringsSep "\n" (mapAttrsToList mkServiceActivation enabledServices)}
     '';
 
-    build.activation.runsvdir = ''
+    home.activation.runsvdir = lib.hm.dag.entryAfter [ "runitServices" ] ''
       export PATH=$PATH:${pkgs.runit}/bin
       if ! ${pkgs.procps}/bin/pgrep -x runsvdir > /dev/null; then
         echo "Starting runsvdir..."

@@ -5,9 +5,9 @@
   ...
 }:
 let
-  musicDirectory = "${config.user.home}/Music";
-  vaultwardenDataDirectory = "${config.user.home}/.local/share/vaultwarden";
-  filebrowserDataDirectory = "${config.user.home}/.local/share/filebrowser";
+  musicDirectory = "${config.home.homeDirectory}/Music";
+  vaultwardenDataDirectory = "${config.home.homeDirectory}/.local/share/vaultwarden";
+  filebrowserDataDirectory = "${config.home.homeDirectory}/.local/share/filebrowser";
   filebrowserDatabase = "${filebrowserDataDirectory}/filebrowser.db";
 in
 {
@@ -53,7 +53,7 @@ in
       enable = true;
       run = ''
         mkdir -p ${musicDirectory}
-        exec ${pkgs.navidrome}/bin/navidrome --configfile "${config.user.home}/.config/navidrome.toml"
+        exec ${pkgs.navidrome}/bin/navidrome --configfile "${config.home.homeDirectory}/.config/navidrome.toml"
       '';
     };
 
