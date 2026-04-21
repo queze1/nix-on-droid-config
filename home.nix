@@ -64,9 +64,15 @@
   };
 
   # Tell agenix where to find SSH keys
-  age.identityPaths = [
-    "${config.user.home}/.ssh/id_ed25519"
-  ];
+  age = {
+    identityPaths = [
+      "${config.user.home}/.ssh/id_ed25519"
+    ];
+    cloudflare-tunnel-token = {
+      file = ../secrets/cloudflare-tunnel-token.age;
+      path = "/etc/cloudflare-tunnel-token";
+    };
+  };
 
   # Read the changelog before changing this value
   home.stateVersion = "24.05";
