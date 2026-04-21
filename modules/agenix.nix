@@ -7,7 +7,7 @@
     };
   };
 
-  config = lib.mkIf (config.secrets != { }) {
+  config = {
     # Tell agenix where to find SSH keys
     age.identityPaths = [
       "${config.home.homeDirectory}/.ssh/id_ed25519"
