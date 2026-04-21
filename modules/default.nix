@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./agenix.nix
+    ./agenix-activation.nix
     ./nix.nix
     ./programs.nix
     ./runit.nix
