@@ -21,7 +21,7 @@
 
   # Configure home-manager
   home-manager = {
-    config = ./home.nix;
+    config = ./home;
     backupFileExtension = "hm-bak";
     useGlobalPkgs = true;
     sharedModules = [ agenix.homeManagerModules.default ];

@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 {
+  imports = [
+    ./runit.nix
+    ./services.nix
+  ];
+
   home.packages = [
     (pkgs.writeShellScriptBin "rebuild" ''
       cd ~/.config/nix-on-droid-config/
@@ -54,13 +59,13 @@
   xdg.dataFile.sillytavern-config = {
     enable = true;
     target = "SillyTavern/config.yaml";
-    source = ./config/sillytavern.yaml;
+    source = ../config/sillytavern.yaml;
   };
 
   xdg.configFile.navidrome-config = {
     enable = true;
     target = "navidrome.toml";
-    source = ./config/navidrome.toml;
+    source = ../config/navidrome.toml;
   };
 
   # Tell agenix where to find SSH keys
