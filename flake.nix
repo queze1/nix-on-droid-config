@@ -15,6 +15,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    agenix.url = "github:ryantm/agenix";
   };
 
   outputs =
@@ -24,11 +26,13 @@
       nixpkgs-unstable,
       home-manager,
       nix-on-droid,
+      agenix,
     }:
     {
       nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
         modules = [
           ./nix-on-droid.nix
+          agenix.nixosModules.default
         ];
 
         # Set nixpkgs instance
