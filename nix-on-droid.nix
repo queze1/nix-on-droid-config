@@ -9,12 +9,14 @@
   user.uid = 10273;
   user.gid = 10273;
 
+  environment.systemPackages = [ agenix.packages.aarch64-linux.default ];
+
   # Add tools to activation PATH
   build.activationBefore.extendPath = ''
     export PATH=$PATH:${pkgs.openssh}/bin:${pkgs.git}/bin
   '';
 
-  # Backup etc files instead of failing to activate generation if a file already exists in /etc
+  # Backup if a file already exists in /etc
   environment.etcBackupExtension = ".bak";
 
   # Configure home-manager
