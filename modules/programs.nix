@@ -8,6 +8,7 @@
     runit
 
     # Basic utilities
+    curlMinimal
     iproute2
     killall
     nano
