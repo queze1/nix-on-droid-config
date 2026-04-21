@@ -30,6 +30,7 @@
       home-manager,
       nix-on-droid,
       agenix,
+      ...
     }:
     {
       nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
