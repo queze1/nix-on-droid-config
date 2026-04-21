@@ -25,7 +25,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
@@ -47,7 +46,7 @@
         };
 
         extraSpecialArgs = {
-          inherit self;
+          inherit agenix;
           pkgs-unstable = import nixpkgs-unstable {
             system = "aarch64-linux";
             overlays = [
@@ -58,7 +57,6 @@
 
         # Set path to home-manager flake
         home-manager-path = home-manager.outPath;
-        home-manager.sharedModules = [ agenix.homeManagerModules.default ];
       };
     };
 }
