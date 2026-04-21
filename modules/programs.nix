@@ -15,6 +15,7 @@
     procps
     which
 
+    caddy
     filebrowser
     navidrome
     pkgs-unstable.sillytavern
