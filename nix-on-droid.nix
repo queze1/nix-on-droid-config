@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-unstable,
   agenix,
   ...
 }:
@@ -23,6 +24,7 @@
     backupFileExtension = "hm-bak";
     useGlobalPkgs = true;
     sharedModules = [ agenix.homeManagerModules.default ];
+    extraSpecialArgs = { inherit pkgs-unstable; };
   };
 
   # Set time zone
