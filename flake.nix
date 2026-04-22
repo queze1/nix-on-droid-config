@@ -32,6 +32,20 @@
       agenix,
       ...
     }:
+    let
+      pkgs = import nixpkgs {
+        system = "aarch64-linux";
+        overlays = [
+          nix-on-droid.overlays.default
+        ];
+      };
+      pkgs-unstable = import nixpkgs-unstable {
+        system = "aarch64-linux";
+        overlays = [
+          nix-on-droid.overlays.default
+        ];
+      };
+    in
     {
       nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
         modules = [
@@ -39,24 +53,12 @@
         ];
 
         # Set nixpkgs instance
-        pkgs = import nixpkgs {
-          system = "aarch64-linux";
-          overlays = [
-            nix-on-droid.overlays.default
-          ];
-        };
-
+        inherit pkgs;
         extraSpecialArgs = {
-          inherit agenix;
-          pkgs-unstable = import nixpkgs-unstable {
-            system = "aarch64-linux";
-            overlays = [
-              nix-on-droid.overlays.default
-            ];
-          };
+          inherit agenix pkgs-unstable;
         };
 
-        # Set path to home-manager flake
+        home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
         home-manager-path = home-manager.outPath;
       };
     };
