@@ -58,7 +58,6 @@
           inherit agenix pkgs-unstable;
         };
 
-        home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
         home-manager-path = home-manager.outPath;
       };
     };
