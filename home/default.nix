@@ -25,8 +25,9 @@
     source = ../config/navidrome.toml;
   };
 
-  # Tell agenix where to find SSH keys
   age = {
+    age.secretsDir = "${config.home.homeDirectory}/.run/agenix";
+    age.secretsMountPoint = "${config.home.homeDirectory}/.run/agenix.d";
     identityPaths = [
       "${config.home.homeDirectory}/.ssh/id_ed25519"
     ];
