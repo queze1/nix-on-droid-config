@@ -20,7 +20,7 @@
 
     # Set up temporary runtime directory
     environment.sessionVariables = {
-      XDG_RUNTIME_DIR = "${config.user.home}/.run";
+      XDG_RUNTIME_DIR = "$HOME/.run";
     };
 
     build.activation.setupRuntimeDir = ''
