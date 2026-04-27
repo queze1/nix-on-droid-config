@@ -14,7 +14,8 @@
   config = {
     # Use build.activation instead of systemd
     build.activation.agenix = ''
-      $VERBOSE_ECHO "Decrypting secrets with agenix..."
+      echo "Decrypting secrets with agenix..."
+      echo ${config.systemd.user.services.agenix.Service.ExecStart}
       $DRY_RUN_CMD ${config.systemd.user.services.agenix.Service.ExecStart}
     '';
   };
