@@ -1,8 +1,3 @@
-# NOTE: Would had been easier to let Home Manager to the symlinking instead of putting in Nix store and then manually symlinking
-# 1. Create shell scripts in Nix store
-# 2. Create directories and symlink shell scripts to them
-# 3. Run runsvdir on it
-
 {
   lib,
   pkgs,
@@ -16,61 +11,54 @@ let
     types
     mkIf
     mapAttrsToList
-    concatStringsSep
     escapeShellArg
-    optionalString
+    optionalAttrs
     ;
 
   cfg = config.services.runit;
   enabledServices = lib.filterAttrs (_: s: s.enable) cfg.services;
-  enabledServiceNames = builtins.attrNames enabledServices;
 
-  mkRunScript =
+  mkServiceFiles =
     name: svc:
-    pkgs.writeShellScript "runit-${name}-run" ''
-      set -eu
-      exec 2>&1
-      ${svc.run}
-    '';
-
-  mkFinishScript =
-    name: svc:
-    pkgs.writeShellScript "runit-${name}-finish" ''
-      set -eu
-      ${svc.finish}
-    '';
-
-  mkLogRunScript =
-    name:
-    pkgs.writeShellScript "runit-${name}-log-run" ''
-      set -eu
-      mkdir -p ${escapeShellArg "${cfg.logDir}/${name}"}
-      exec ${pkgs.runit}/bin/svlogd -tt ${escapeShellArg "${cfg.logDir}/${name}"}
-    '';
-
-  mkServiceActivation = name: svc: ''
-    echo "Adding runit service ${name}..."
-    mkdir -p ${escapeShellArg "${cfg.serviceDir}/${name}"}
-    ln -sfn ${mkRunScript name svc} ${escapeShellArg "${cfg.serviceDir}/${name}/run"}
-
-    ${optionalString (svc.finish == "") ''
-      rm -f ${escapeShellArg "${cfg.serviceDir}/${name}/finish"}
-    ''}
-
-    ${optionalString (svc.finish != "") ''
-      ln -sfn ${mkFinishScript name svc} ${escapeShellArg "${cfg.serviceDir}/${name}/finish"}
-    ''}
-
-    ${optionalString (!svc.log.enable) ''
-      rm -rf ${escapeShellArg "${cfg.serviceDir}/${name}/log"}
-    ''}
-
-    ${optionalString svc.log.enable ''
-      mkdir -p ${escapeShellArg "${cfg.serviceDir}/${name}/log"}
-      ln -sfn ${mkLogRunScript name} ${escapeShellArg "${cfg.serviceDir}/${name}/log/run"}
-    ''}
-  '';
-
+    let
+      serviceTarget = ".${cfg.serviceDir}/${name}";
+      logTarget = ".${cfg.logDir}/${name}";
+    in
+    {
+      "runit-${name}-run" = {
+        target = "${serviceTarget}/run";
+        executable = true;
+        text = ''
+          #!${pkgs.runtimeShell}
+          set -eu
+          exec 2>&1
+          ${svc.run}
+        '';
+      };
+    }
+    // optionalAttrs (svc.finish != "") {
+      "runit-${name}-finish" = {
+        target = "${serviceTarget}/finish";
+        executable = true;
+        text = ''
+          #!${pkgs.runtimeShell}
+          set -eu
+          ${svc.finish}
+        '';
+      };
+    }
+    // optionalAttrs svc.log.enable {
+      "runit-${name}-log-run" = {
+        target = "${serviceTarget}/log/run";
+        executable = true;
+        text = ''
+          #!${pkgs.runtimeShell}
+          set -eu
+          mkdir -p ${escapeShellArg logTarget}
+          exec ${pkgs.runit}/bin/svlogd -tt ${escapeShellArg logTarget}
+        '';
+      };
+    };
 in
 {
   options.services.runit = {
@@ -120,29 +108,14 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.activation.runitServices = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+    home.file = lib.mkMerge (mapAttrsToList mkServiceFiles enabledServices);
+
+    home.activation.runitDirectories = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
       $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.serviceDir}
       $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.logDir}
-
-      # Clean up unused services
-      for path in ${escapeShellArg cfg.serviceDir}/*; do
-        [ -e "$path" ] || continue
-        name=$(basename "$path")
-        case " ${concatStringsSep " " enabledServiceNames} " in
-          *" $name "*)
-            ;;
-          *)
-            echo "Cleaning up runit service $name..."
-            $DRY_RUN_CMD rm $VERBOSE_ARG --recursive --force "$path"
-            $DRY_RUN_CMD rm $VERBOSE_ARG --recursive --force ${escapeShellArg cfg.logDir}/"$name"
-            ;;
-        esac
-      done
-
-      ${concatStringsSep "\n" (mapAttrsToList mkServiceActivation enabledServices)}
     '';
 
-    home.activation.runsvdir = lib.hm.dag.entryAfter [ "runitServices" ] ''
+    home.activation.runsvdir = lib.hm.dag.entryAfter [ "runitDirectories" ] ''
       export PATH=$PATH:${pkgs.runit}/bin
       if ! ${pkgs.procps}/bin/pgrep -x runsvdir > /dev/null; then
         echo "Starting runsvdir..."
