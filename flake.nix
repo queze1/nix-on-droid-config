@@ -24,12 +24,11 @@
   };
 
   outputs =
-    {
+    inputs@{
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
       nix-on-droid,
-      agenix,
       ...
     }:
     let
@@ -55,7 +54,7 @@
         # Set nixpkgs instance
         inherit pkgs;
         extraSpecialArgs = {
-          inherit agenix pkgs-unstable;
+          inherit inputs pkgs-unstable;
         };
 
         home-manager-path = home-manager.outPath;
