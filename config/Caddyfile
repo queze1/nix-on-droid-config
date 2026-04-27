@@ -1,5 +1,7 @@
 {
     http_port 8080
+    # Cloudflare already handles HTTPS
+    auto_https off
 }
 
 navidrome.osipol.uk {
