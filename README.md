@@ -11,7 +11,7 @@ This repository contains my [nix-on-droid](https://github.com/nix-community/nix-
 - Service management with [runit](https://smarden.org/runit/).
 - Declarative server configuration using [flakes](https://wiki.nixos.org/wiki/Flakes) and [Home Manager](https://github.com/nix-community/home-manager).
 - File synchronisation with [Syncthing](https://syncthing.net/).
-- Remote building with Nix.
+- Secret management with [agenix](https://github.com/ryantm/agenix).
 
 ## Hosts
 
