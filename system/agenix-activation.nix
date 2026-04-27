@@ -19,7 +19,7 @@
     '';
 
     # Set up temporary runtime directory
-    environment.sessionVariables = {
+    environment.variables = {
       XDG_RUNTIME_DIR = "${config.user.home}/.run";
     };
 
