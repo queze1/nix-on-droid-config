@@ -1,3 +1,4 @@
+# NOTE: Would had been easier to let Home Manager to the symlinking instead of putting in Nix store and then manually symlinking
 # 1. Create shell scripts in Nix store
 # 2. Create directories and symlink shell scripts to them
 # 3. Run runsvdir on it
