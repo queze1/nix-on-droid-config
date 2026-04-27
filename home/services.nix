@@ -35,7 +35,7 @@ in
     services.cloudflared = {
       enable = true;
       run = ''
-        exec ${pkgs.cloudflared}/bin/cloudflared tunnel run --token-file ${config.age.secrets.cloudflare-tunnel-token.path}
+        exec ${pkgs.cloudflared}/bin/cloudflared tunnel run --protocol http2 --token-file ${config.age.secrets.cloudflare-tunnel-token.path}
       '';
       finish = ''
         sleep 5
