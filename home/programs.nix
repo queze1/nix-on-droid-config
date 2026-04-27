@@ -1,9 +1,6 @@
 { pkgs, pkgs-unstable, ... }:
 {
   home.packages = with pkgs; [
-    # Init manager
-    runit
-
     # Services
     caddy
     cloudflared
