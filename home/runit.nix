@@ -34,6 +34,7 @@ let
           exec 2>&1
           ${svc.run}
         '';
+        force = true;
       };
     }
     // optionalAttrs (svc.finish != "") {
@@ -45,6 +46,7 @@ let
           set -eu
           ${svc.finish}
         '';
+        force = true;
       };
     }
     // optionalAttrs svc.log.enable {
@@ -57,6 +59,7 @@ let
           mkdir -p ${escapeShellArg logTarget}
           exec ${pkgs.runit}/bin/svlogd -tt ${escapeShellArg logTarget}
         '';
+        force = true;
       };
     };
 in
