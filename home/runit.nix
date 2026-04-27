@@ -21,8 +21,8 @@ let
   mkServiceFiles =
     name: svc:
     let
-      serviceTarget = ".${cfg.serviceDir}/${name}";
-      logTarget = ".${cfg.logDir}/${name}";
+      serviceTarget = "${cfg.serviceDir}/${name}";
+      logTarget = "${cfg.logDir}/${name}";
     in
     {
       "runit-${name}-run" = {
