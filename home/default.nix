@@ -17,18 +17,6 @@
     '')
   ];
 
-  xdg.dataFile.sillytavern-config = {
-    enable = true;
-    target = "SillyTavern/config.yaml";
-    source = ../config/sillytavern.yaml;
-  };
-
-  xdg.configFile.navidrome-config = {
-    enable = true;
-    target = "navidrome.toml";
-    source = ../config/navidrome.toml;
-  };
-
   age = {
     secretsDir = "${config.home.homeDirectory}/.run/agenix";
     secretsMountPoint = "${config.home.homeDirectory}/.run/agenix.d";
