@@ -33,7 +33,6 @@
     secrets = {
       cloudflare-tunnel-token = {
         file = ../secrets/cloudflare-tunnel-token.age;
-        path = "/etc/cloudflare-tunnel-token";
       };
     };
   };
