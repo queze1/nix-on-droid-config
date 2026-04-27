@@ -1,7 +1,7 @@
 {
+  inputs,
   pkgs,
   pkgs-unstable,
-  agenix,
   ...
 }:
 {
@@ -10,7 +10,7 @@
   user.uid = 10273;
   user.gid = 10273;
 
-  environment.packages = [ agenix.packages.aarch64-linux.default ];
+  environment.packages = [ inputs.agenix.packages.aarch64-linux.default ];
 
   # Add tools to activation PATH
   build.activationBefore.extendPath = ''
@@ -25,7 +25,7 @@
     config = ./home;
     backupFileExtension = "hm-bak";
     useGlobalPkgs = true;
-    sharedModules = [ agenix.homeManagerModules.default ];
+    sharedModules = [ inputs.agenix.homeManagerModules.default ];
     extraSpecialArgs = { inherit pkgs-unstable; };
   };
 
