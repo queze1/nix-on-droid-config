@@ -1,20 +1,8 @@
-{
-  lib,
-  pkgs,
-  pkgs-unstable,
-  ...
-}:
-let
-  caddyWithTailscale = pkgs.caddy.withPlugins {
-    # Last updated 27/04/2026
-    plugins = [ "github.com/tailscale/caddy-tailscale@bb080c4414acd465d8be93b4d8f907dbb2ab2544" ];
-    hash = lib.fakeHash;
-  };
-in
+{ pkgs, pkgs-unstable, ... }:
 {
   home.packages = with pkgs; [
     # Services
-    caddyWithTailscale
+    caddy
     cloudflared
     filebrowser
     navidrome
