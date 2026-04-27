@@ -43,10 +43,8 @@
     };
   };
 
-  # Capture agenix systemd and run it as an activation script
-  home.activation.agenix = ''
-    echo "Decrypting secrets with agenix..."
-    $DRY_RUN_CMD ${config.systemd.user.services.agenix.Service.ExecStart.head}
+  home.activation.agenix = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    ${pkgs.agenix}/bin/agenix-home-manager-mount-secrets
   '';
 
   # Read the changelog before changing this value
