@@ -11,6 +11,17 @@ let
   filebrowserDatabase = "${filebrowserDataDirectory}/filebrowser.db";
 in
 {
+  home.packages = with pkgs; [
+    caddy
+    cloudflared
+    filebrowser
+    navidrome
+    pkgs-unstable.sillytavern
+    pkgs-unstable.vaultwarden
+    pkgs-unstable.vaultwarden-webvault
+    syncthing
+  ];
+
   services.runit = {
     enable = true;
 

@@ -5,7 +5,7 @@
   ...
 }:
 {
-  imports = [ ./modules ];
+  imports = [ ./system ];
 
   user.uid = 10273;
   user.gid = 10273;
