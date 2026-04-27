@@ -22,13 +22,31 @@ in
     syncthing
   ];
 
+  xdg.configFile.caddyfile = {
+    enable = true;
+    target = "Caddyfile";
+    source = ../config/Caddyfile;
+  };
+
+  xdg.dataFile.sillytavern-config = {
+    enable = true;
+    target = "SillyTavern/config.yaml";
+    source = ../config/sillytavern.yaml;
+  };
+
+  xdg.configFile.navidrome-config = {
+    enable = true;
+    target = "navidrome.toml";
+    source = ../config/navidrome.toml;
+  };
+
   services.runit = {
     enable = true;
 
     services.caddy = {
       enable = true;
       run = ''
-        exec ${pkgs.caddy}/bin/caddy run ${../config/Caddyfile}
+        exec ${pkgs.caddy}/bin/caddy run --config ${config.home.homeDirectory}/.config/Caddyfile
       '';
     };
 
@@ -63,7 +81,7 @@ in
         export DATA_FOLDER="${vaultwardenDataDirectory}"
         export WEB_VAULT_FOLDER="${pkgs-unstable.vaultwarden-webvault}/share/vaultwarden/vault"
         export ROCKET_ADDRESS="0.0.0.0"
-        export ROCKET_PORT="8080"
+        export ROCKET_PORT="8081"
         export SIGNUPS_ALLOWED="false"
         export SHOW_PASSWORD_HINT="false"
         exec ${pkgs-unstable.vaultwarden}/bin/vaultwarden
@@ -84,7 +102,7 @@ in
         mkdir -p ${filebrowserDataDirectory}
         exec ${pkgs.filebrowser}/bin/filebrowser \
           --address 0.0.0.0 \
-          --port 8081 \
+          --port 8082 \
           --database "${filebrowserDatabase}" \
           --root "${musicDirectory}"
       '';
