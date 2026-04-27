@@ -49,10 +49,6 @@
     $DRY_RUN_CMD ${config.systemd.user.services.agenix.Service.ExecStart}
   '';
 
-  home.activation.printAgenixExecStart = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    echo "Agenix ExecStart: ${lib.concatStringsSep " " config.systemd.user.services.agenix.Service.ExecStart}"
-  '';
-
   # Read the changelog before changing this value
   home.stateVersion = "24.05";
 }
