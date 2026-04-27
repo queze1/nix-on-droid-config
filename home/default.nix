@@ -43,6 +43,12 @@
     };
   };
 
+  # Capture agenix systemd and run it as an activation script
+  home.activation.agenix = ''
+    echo "Decrypting secrets with agenix..."
+    $DRY_RUN_CMD ${config.systemd.user.services.agenix.Service.ExecStart}
+  '';
+
   home.activation.printAgenixExecStart = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     echo "Agenix ExecStart: ${lib.concatStringsSep " " config.systemd.user.services.agenix.Service.ExecStart}"
   '';
