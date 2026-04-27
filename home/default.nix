@@ -26,8 +26,8 @@
   };
 
   age = {
-    age.secretsDir = "${config.home.homeDirectory}/.run/agenix";
-    age.secretsMountPoint = "${config.home.homeDirectory}/.run/agenix.d";
+    secretsDir = "${config.home.homeDirectory}/.run/agenix";
+    secretsMountPoint = "${config.home.homeDirectory}/.run/agenix.d";
     identityPaths = [
       "${config.home.homeDirectory}/.ssh/id_ed25519"
     ];
