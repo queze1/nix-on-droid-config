@@ -25,10 +25,20 @@ in
   services.runit = {
     enable = true;
 
+    services.caddy = {
+      enable = true;
+      run = ''
+        exec ${pkgs.caddy}/bin/caddy run ${../config/Caddyfile}
+      '';
+    };
+
     services.cloudflared = {
       enable = true;
       run = ''
         exec ${pkgs.cloudflared}/bin/cloudflared tunnel run --token-file ${config.age.secrets.cloudflare-tunnel-token.path}
+      '';
+      finish = ''
+        sleep 5
       '';
     };
 
