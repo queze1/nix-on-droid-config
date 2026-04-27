@@ -3,7 +3,6 @@
   environment.packages = with pkgs; [
     # Init manager
     runit
-    systemd
 
     curlMinimal
     git
