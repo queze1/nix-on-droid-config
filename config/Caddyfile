@@ -3,7 +3,3 @@
     https_port 8443
 }
 
-http://navidrome.osipol.uk {
-	reverse_proxy localhost:4533
-}
-

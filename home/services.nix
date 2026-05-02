@@ -44,14 +44,14 @@ in
     enable = true;
 
     services.caddy = {
-      enable = true;
+      enable = false;
       run = ''
         exec ${pkgs.caddy}/bin/caddy run --config ${config.home.homeDirectory}/.config/Caddyfile
       '';
     };
 
     services.cloudflared = {
-      enable = true;
+      enable = false;
       run = ''
         exec ${pkgs.cloudflared}/bin/cloudflared tunnel run --protocol http2 --token-file ${config.age.secrets.cloudflare-tunnel-token.path}
       '';
