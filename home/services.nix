@@ -44,7 +44,7 @@ in
     enable = true;
 
     services.caddy = {
-      enable = false;
+      enable = true;
       run = ''
         exec ${pkgs.caddy}/bin/caddy run --config ${config.home.homeDirectory}/.config/Caddyfile
       '';
