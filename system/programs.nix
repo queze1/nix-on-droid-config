@@ -4,14 +4,15 @@
     # Init manager
     runit
 
-    curlMinimal
+    # System utils
+    curl
     git
     iproute2
-    killall
     nano
     ncurses
     openssh
     procps
+    psmisc
     util-linux
     which
   ];
