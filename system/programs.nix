@@ -12,6 +12,7 @@
     ncurses
     openssh
     procps
+    util-linux
     which
   ];
 }
