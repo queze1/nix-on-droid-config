@@ -113,6 +113,11 @@ in
   config = mkIf cfg.enable {
     home.file = lib.mkMerge (mapAttrsToList mkServiceFiles enabledServices);
 
+    home.shellAliases = {
+      "cd-service-dir" = "cd ${config.services.runit.serviceDir}";
+      "cd-log-dir" = "cd ${config.services.runit.logDir}";
+    };
+
     home.activation.runitDirectories = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
       $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.serviceDir}
       $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.logDir}
