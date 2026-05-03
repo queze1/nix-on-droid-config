@@ -165,7 +165,7 @@ in
       export PATH=$PATH:${pkgs.runit}/bin:${pkgs.procps}/bin
         if ! ${pkgs.procps}/bin/pgrep -x runsvdir > /dev/null; then
           echo "Starting runsvdir..."
-          $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'nohup ${pkgs.runit}/bin/runsvdir ${escapeShellArg cfg.serviceDir} >> ${escapeShellArg "${cfg.logDir}/runsvdir.log"} 2>&1 &'
+          $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'setsid ${pkgs.runit}/bin/runsvdir ${escapeShellArg cfg.serviceDir} > ${escapeShellArg "${cfg.logDir}/runsvdir.log"} 2>&1 &'
         fi
     '';
   };
