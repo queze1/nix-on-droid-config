@@ -4,7 +4,7 @@
     # Services
     (caddy.withPlugins {
       plugins = [
-        "github.com/caddy-dns/cloudflare"
+        "github.com/caddy-dns/cloudflare@master"
       ];
       hash = "sha256-a8737d095ad5a48ca031cea6ab704057dbc2d250";
     })
