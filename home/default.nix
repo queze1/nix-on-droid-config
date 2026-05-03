@@ -12,8 +12,8 @@
 
   home = {
     shellAliases = {
-      "cd-service-dir" = "cd ${config.options.services.runit.serviceDir}";
-      "cd-log-dir" = "cd ${config.options.services.runit.logDir}";
+      "cd-service-dir" = "cd ${config.services.runit.serviceDir}";
+      "cd-log-dir" = "cd ${config.services.runit.logDir}";
     };
 
     packages = [
