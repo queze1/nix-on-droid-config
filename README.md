@@ -46,6 +46,23 @@ ssh -p 8022 nix-on-droid@YOUR_PHONE
 5. Optional: Set up remote deployment with [deploy-rs](https://github.com/serokell/deploy-rs). ([guide](https://github.com/nix-community/nix-on-droid/wiki/Remote-deploy-with-deploy%E2%80%90rs))
   - Without remote deployment, updating `nixpkgs` can take around 30 minutes in evaluation time (depending on phone specs).
 
+## Useful Commands
+```
+# Run if SSH stopped working
+sshd-start
+
+# Alias to pull changes and rebuild
+# Equivalent to `cd ~/.config/nix-on-droid-config/ && git pull && nix-on-droid switch --flake .`
+rebuild
+
+# By default aliases to `cd ~/.local/state/runit/services`
+cd-service-dir
+
+# By default aliases to `cd ~/.local/var/log/services`
+cd-log-dir
+```
+
+
 ## Hosts
 
 | Hostname | Model | Android Version | CPU | RAM | Storage |
