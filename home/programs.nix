@@ -6,7 +6,7 @@
       plugins = [
         "github.com/caddy-dns/cloudflare@master"
       ];
-      hash = "sha256-a8737d095ad5a48ca031cea6ab704057dbc2d250";
+      hash = "sha256-4WF7tIx8d6O/Bd0q9GhMch8lS3nlR5N3Zg4ApA3hrKw=";
     })
 
     cloudflared
