@@ -156,30 +156,8 @@ in
 
     # home.packages = [ runit-manager ];
 
-    home.activation.runitDirectories = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      run --quiet mkdir --parents ${escapeShellArg cfg.serviceDir}
-      run --quiet mkdir --parents ${escapeShellArg cfg.logDir}
-    '';
-
-    home.activation.runitCleanup = lib.hm.dag.entryAfter [ "runitDirectories" ] ''
-      service_dir=${escapeShellArg cfg.serviceDir}
-      enabled_names="${lib.concatStringsSep " " (builtins.attrNames enabledServices)}"
-
-      if [ -d "$service_dir" ]; then
-        for dir in "$service_dir"/*; do
-          [ -d "$dir" ] || continue
-          name=$(basename "$dir")
-          case " $enabled_names " in
-            *" $name "*) ;;
-            *)
-              run rm -rf "$dir"
-              ;;
-          esac
-        done
-      fi
-    '';
-
-    home.activation.runsvdir = lib.hm.dag.entryAfter [ "runitCleanup" "installPackages" ] ''
+    home.activation.runsvdir = lib.hm.dag.entryAfter [ "installPackages" ] ''
+      export PATH=$PATH:${pkgs.runit}/bin
       if ! ${pkgs.procps}/bin/pgrep -x runsvdir > /dev/null; then
         echo "Starting runsvdir..."
         run ${pkgs.util-linux}/bin/setsid ${pkgs.runit}/bin/runsvdir ${escapeShellArg cfg.serviceDir} \
