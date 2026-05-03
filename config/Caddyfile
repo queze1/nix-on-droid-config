@@ -3,23 +3,28 @@
     https_port 8443
 }
 
-reverse_proxy /sillytavern {
+/sillytavern {
+    reverse_proxy
     localhost:8000
 }
 
-reverse_proxy /syncthing {
+/syncthing {
+    reverse_proxy
     localhost:8384
 }
 
-reverse_proxy /navidrome {
+/navidrome {
+    reverse_proxy
     localhost:4533
 }
 
-reverse_proxy /vaultwarden {
+/vaultwarden {
+    reverse_proxy
     localhost:8081
 }
 
-reverse_proxy /filebrowser {
+/filebrowser {
+    reverse_proxy
     localhost:8082
 }
 
