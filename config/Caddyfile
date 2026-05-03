@@ -3,7 +3,7 @@
     https_port 8443
 }
 
-:8080 {
+poco-x3-pro.tail8963fb.ts.net {
     handle_path /sillytavern* {
         reverse_proxy localhost:8000
     }
