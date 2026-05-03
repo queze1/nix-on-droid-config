@@ -28,6 +28,9 @@
       cloudflare-tunnel-token = {
         file = ../secrets/cloudflare-tunnel-token.age;
       };
+      cloudflare-api-token = {
+        file = ../secrets/cloudflare-api-token.age;
+      };
     };
   };
 
