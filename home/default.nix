@@ -10,20 +10,13 @@
     ./services.nix
   ];
 
-  home = {
-    shellAliases = {
-      "cd-service-dir" = "cd ${config.services.runit.serviceDir}";
-      "cd-log-dir" = "cd ${config.services.runit.logDir}";
-    };
-
-    packages = [
-      (pkgs.writeShellScriptBin "rebuild" ''
-        cd ~/.config/nix-on-droid-config/ &&
-        git pull &&
-        nix-on-droid switch --flake .
-      '')
-    ];
-  };
+  home.packages = [
+    (pkgs.writeShellScriptBin "rebuild" ''
+      cd ~/.config/nix-on-droid-config/ &&
+      git pull &&
+      nix-on-droid switch --flake .
+    '')
+  ];
 
   age = {
     secretsDir = "${config.home.homeDirectory}/.run/agenix";
