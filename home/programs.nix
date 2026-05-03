@@ -14,7 +14,6 @@
 
   programs = {
     bash.enable = true;
-    fish.enable = true;
     git = {
       enable = true;
       settings = {
