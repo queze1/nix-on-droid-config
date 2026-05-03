@@ -3,28 +3,23 @@
     https_port 8443
 }
 
-/sillytavern {
-    reverse_proxy
-    localhost:8000
+sillytavern.osipol.uk {
+    reverse_proxy localhost:8000
 }
 
-/syncthing {
-    reverse_proxy
-    localhost:8384
+syncthing.osipol.uk {
+    reverse_proxy localhost:8384
 }
 
-/navidrome {
-    reverse_proxy
-    localhost:4533
+navidrome.osipol.uk {
+    reverse_proxy localhost:4533
 }
 
-/vaultwarden {
-    reverse_proxy
-    localhost:8081
+vaultwarden.osipol.uk {
+    reverse_proxy localhost:8081
 }
 
-/filebrowser {
-    reverse_proxy
-    localhost:8082
+filebrowser.osipol.uk {
+    reverse_proxy localhost:8082
 }
 
