@@ -156,15 +156,16 @@ in
 
     home.packages = [ runit-manager ];
 
-    home.activation.runitDirectories = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+    home.activation.runitDirectories = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.serviceDir}
       $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.logDir}
     '';
 
-    home.activation.runsvdir = lib.hm.dag.entryAfter [ "runitDirectories" ] ''
+    home.activation.runsvdir = lib.hm.dag.entryAfter [ "runitDirectories" "installPackages" ] ''
       if ! ${pkgs.procps}/bin/pgrep -x runsvdir > /dev/null; then
         echo "Starting runsvdir..."
-        $DRY_RUN_CMD ${pkgs.runtimeShell} -lc 'setsid ${pkgs.runit}/bin/runsvdir ${escapeShellArg cfg.serviceDir} > ${escapeShellArg "${cfg.logDir}/runsvdir.log"} 2>&1 &'
+        run setsid ${pkgs.runit}/bin/runsvdir ${escapeShellArg cfg.serviceDir} \
+            > ${escapeShellArg "${cfg.logDir}/runsvdir.log"} 2>&1 &
       fi
     '';
   };
