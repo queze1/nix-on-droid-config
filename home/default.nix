@@ -5,6 +5,7 @@
 }:
 {
   imports = [
+    ./programs.nix
     ./runit.nix
     ./services.nix
   ];
