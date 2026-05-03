@@ -18,3 +18,33 @@ This repository contains my [nix-on-droid](https://github.com/nix-community/nix-
 | Hostname | Model | Android Version | CPU | RAM | Storage |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | poco-x3-pro | Xiaomi Poco X3 Pro | 12 | Octa-core Max 2.96GHz | 8 GB | 256 GB |
+
+
+## Installation
+1. Install [Nix-on-Droid](https://github.com/nix-community/nix-on-droid) on an Android device. Set up with flakes (may take 20-30 minutes).
+Optional but highly recommended:
+2. Install [Tailscale](https://tailscale.com/) on your device and where you will be SSHing into the device. (optional but highly recommended)
+3. On the device:
+```bash
+cd ~/.config/nix-on-droid
+
+vi nix-on-droid.nix
+# Use vi to add git-minimal to environment.packages
+# Optional: Add iproute2 (to get IP address), nano (alternative text editor)
+nix-on-droid switch
+
+# If you are forking, don't forget to update these files
+# system/sshd.nix: Add your SSH public key
+# secrets/*: Configure your agenix secrets
+# nix-on-droid.nix: Update user.gid and user.uid with the results of `id` on your device
+
+cd ..
+git clone https://github.com/queze1/nix-on-droid-config.git  # or your fork
+cd nix-on-droid-config
+nix-on-droid switch  # may take an hour or more for the first time
+
+# Check if SSH has been configured
+# Use Tailscale DNS or get your device's IP address with `ip addr`
+ssh -p 8022 nix-on-droid@YOUR_PHONE
+```
+
