@@ -149,6 +149,11 @@ in
   config = mkIf cfg.enable {
     home.file = lib.mkMerge (mapAttrsToList mkServiceFiles enabledServices);
 
+    home.sessionVariables = {
+      # Set service directory for sv
+      SVDIR = "${config.services.runit.serviceDir}";
+    };
+
     home.shellAliases = {
       "cd-service-dir" = "cd ${config.services.runit.serviceDir}";
       "cd-log-dir" = "cd ${config.services.runit.logDir}";
