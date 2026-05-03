@@ -10,4 +10,11 @@ in
     ];
     armor = true;
   };
+  "cloudflare-api-token.age" = {
+    publicKeys = [
+      poco-x3-pro
+      utm-vm
+    ];
+    armor = true;
+  };
 }
