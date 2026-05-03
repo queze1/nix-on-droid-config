@@ -6,23 +6,28 @@
 poco-x3-pro.tail8963fb.ts.net:8443 {
     tls internal
 
-    handle_path /sillytavern* {
+    redir /sillytavern /sillytavern/
+    handle /sillytavern/* {
         reverse_proxy localhost:8000
     }
 
-    handle_path /syncthing* {
+    redir /syncthing /syncthing/
+    handle /syncthing/* {
         reverse_proxy localhost:8384
     }
 
-    handle_path /navidrome* {
+    redir /navidrome /navidrome/
+    handle /navidrome/* {
         reverse_proxy localhost:4533
     }
 
-    handle_path /vaultwarden* {
+    redir /vaultwarden /vaultwarden/
+    handle /vaultwarden/* {
         reverse_proxy localhost:8081
     }
 
-    handle_path /filebrowser* {
+    redir /filebrowser /filebrowser/
+    handle /filebrowser/* {
         reverse_proxy localhost:8082
     }
 }
