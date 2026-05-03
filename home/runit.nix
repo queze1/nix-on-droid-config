@@ -154,7 +154,7 @@ in
       "cd-log-dir" = "cd ${config.services.runit.logDir}";
     };
 
-    home.packages = runit-manager;
+    home.packages = [ runit-manager ];
 
     home.activation.runitDirectories = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
       $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.serviceDir}
