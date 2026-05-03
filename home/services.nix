@@ -80,7 +80,6 @@ in
         mkdir -p ${vaultwardenDataDirectory}
         export DATA_FOLDER="${vaultwardenDataDirectory}"
         export WEB_VAULT_FOLDER="${pkgs-unstable.vaultwarden-webvault}/share/vaultwarden/vault"
-        export DOMAIN="/vaultwarden"
         export ROCKET_ADDRESS="0.0.0.0"
         export ROCKET_PORT="8081"
         export SIGNUPS_ALLOWED="false"
