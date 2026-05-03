@@ -164,7 +164,7 @@ in
     home.activation.runsvdir = lib.hm.dag.entryAfter [ "runitDirectories" "installPackages" ] ''
       if ! ${pkgs.procps}/bin/pgrep -x runsvdir > /dev/null; then
         echo "Starting runsvdir..."
-        run setsid ${pkgs.runit}/bin/runsvdir ${escapeShellArg cfg.serviceDir} \
+        run ${pkgs.util-linux}/bin/setsid ${pkgs.runit}/bin/runsvdir ${escapeShellArg cfg.serviceDir} \
             > ${escapeShellArg "${cfg.logDir}/runsvdir.log"} 2>&1 &
       fi
     '';
