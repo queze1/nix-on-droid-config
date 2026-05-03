@@ -15,5 +15,8 @@
     psmisc
     util-linux
     which
+
+    # CLI tools
+    htop
   ];
 }
