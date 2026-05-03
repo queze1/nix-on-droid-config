@@ -32,6 +32,7 @@ nix-on-droid switch
 # system/sshd.nix: Add your SSH public key
 # secrets/*: Configure your agenix secrets
 # nix-on-droid.nix: Update user.gid and user.uid with the results of `id nix-on-droid` on your device
+# config/Caddyfile: Update domain
 
 cd ..
 git clone https://github.com/queze1/nix-on-droid-config.git  # or your fork
@@ -60,6 +61,9 @@ cd-service-dir
 
 # By default aliases to `cd ~/.local/var/log/services`
 cd-log-dir
+
+# Shell script to manage runsvdir
+runit-manager start|stop|status
 ```
 
 
