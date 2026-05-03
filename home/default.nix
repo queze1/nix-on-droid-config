@@ -34,7 +34,7 @@
   # Capture agenix systemd and run it as an activation script
   home.activation.agenix = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     echo "Decrypting secrets with agenix..."
-    $DRY_RUN_CMD ${builtins.head config.systemd.user.services.agenix.Service.ExecStart}
+    run ${builtins.head config.systemd.user.services.agenix.Service.ExecStart}
   '';
 
   # Read the changelog before changing this value
