@@ -6,6 +6,7 @@
 
     # System utils
     curl
+    findutils
     git
     iproute2
     nano
