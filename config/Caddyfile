@@ -3,24 +3,28 @@
     https_port 8443
 }
 
-poco-x3-pro.tail8963fb.ts.net {
-    handle_path /sillytavern* {
-        reverse_proxy localhost:8000
-    }
-
-    handle_path /syncthing* {
-        reverse_proxy localhost:8384
-    }
-
-    handle_path /navidrome* {
-        reverse_proxy localhost:4533
-    }
-
-    handle_path /vaultwarden* {
-        reverse_proxy localhost:8081
-    }
-
-    handle_path /filebrowser* {
-        reverse_proxy localhost:8082
-    }
+/sillytavern {
+    reverse_proxy
+    localhost:8000
 }
+
+/syncthing {
+    reverse_proxy
+    localhost:8384
+}
+
+/navidrome {
+    reverse_proxy
+    localhost:4533
+}
+
+/vaultwarden {
+    reverse_proxy
+    localhost:8081
+}
+
+/filebrowser {
+    reverse_proxy
+    localhost:8082
+}
+
