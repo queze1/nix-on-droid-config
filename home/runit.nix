@@ -157,8 +157,8 @@ in
     home.packages = [ runit-manager ];
 
     home.activation.runitDirectories = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.serviceDir}
-      $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents ${escapeShellArg cfg.logDir}
+      run --quiet mkdir --parents ${escapeShellArg cfg.serviceDir}
+      run --quiet mkdir --parents ${escapeShellArg cfg.logDir}
     '';
 
     home.activation.runsvdir = lib.hm.dag.entryAfter [ "runitDirectories" "installPackages" ] ''
