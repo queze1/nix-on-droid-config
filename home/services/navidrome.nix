@@ -49,7 +49,7 @@ in
       enable = true;
       run = ''
         mkdir -p ${cfg.musicDirectory}
-        exec ${pkgs.navidrome}/bin/navidrome --configfile "${config.home.homeDirectory}/.config/navidrome.toml"
+        exec ${pkgs.navidrome}/bin/navidrome --configfile "${config.home.homeDirectory}/.config/navidrome/config.toml"
       '';
     };
   };
