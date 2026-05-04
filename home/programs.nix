@@ -1,23 +1,5 @@
-{ pkgs, pkgs-unstable, ... }:
+{ ... }:
 {
-  home.packages = with pkgs; [
-    # Services
-    (caddy.withPlugins {
-      plugins = [
-        "github.com/caddy-dns/cloudflare@v0.2.4"
-      ];
-      hash = "sha256-4WF7tIx8d6O/Bd0q9GhMch8lS3nlR5N3Zg4ApA3hrKw=";
-    })
-
-    cloudflared
-    filebrowser
-    navidrome
-    pkgs-unstable.sillytavern
-    pkgs-unstable.vaultwarden
-    pkgs-unstable.vaultwarden-webvault
-    syncthing
-  ];
-
   programs = {
     bash.enable = true;
     git = {
