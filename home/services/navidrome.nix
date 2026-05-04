@@ -1,10 +1,37 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-  musicDirectory = "${config.home.homeDirectory}/Music";
-  dataDirectory = "${config.home.homeDirectory}/.local/share/navidrome";
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
+
+  cfg = config.services.navidrome;
 in
 {
-  config = {
+  options.services.navidrome = {
+    enable = mkEnableOption "navidrome";
+
+    musicDirectory = mkOption {
+      type = types.str;
+      default = "${config.home.homeDirectory}/Music";
+      description = "Directory for Navidrome music files.";
+    };
+
+    dataDirectory = mkOption {
+      type = types.str;
+      default = "${config.home.homeDirectory}/.local/share/navidrome";
+      description = "Directory for Navidrome data.";
+    };
+  };
+
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       navidrome
     ];
@@ -13,8 +40,8 @@ in
       enable = true;
       target = "navidrome/config.yaml";
       text = ''
-        MusicFolder = "${musicDirectory}"
-        DataFolder = "${dataDirectory}"
+        MusicFolder = "${cfg.musicDirectory}"
+        DataFolder = "${cfg.dataDirectory}"
         Address = "0.0.0.0"
         Port = 4533
       '';
@@ -23,7 +50,7 @@ in
     services.runit.services.navidrome = {
       enable = true;
       run = ''
-        mkdir -p ${musicDirectory}
+        mkdir -p ${cfg.musicDirectory}
         exec ${pkgs.navidrome}/bin/navidrome --configfile "${config.home.homeDirectory}/.config/navidrome.toml"
       '';
     };
