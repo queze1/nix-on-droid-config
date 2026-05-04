@@ -9,6 +9,7 @@
     ./syncthing.nix
     ./vaultwarden.nix
   ];
+  services.runit.enable = true;
 
   services.caddy.enable = true;
   services.cloudflared.enable = false;
