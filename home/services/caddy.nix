@@ -45,10 +45,6 @@ in
           reverse_proxy localhost:8000
         }
 
-        syncthing.osipol.uk {
-          reverse_proxy localhost:8384
-        }
-
         navidrome.osipol.uk {
           reverse_proxy localhost:4533
         }
