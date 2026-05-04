@@ -7,15 +7,13 @@
 let
   inherit (lib)
     mkEnableOption
-    mkForce
     mkIf
     ;
 
   cfg = config.services.syncthing;
 in
 {
-  # Override Home Manager services.syncthing as it relies on systemd
-  options.services.syncthing = mkForce {
+  options.services.syncthing = {
     enable = mkEnableOption "syncthing";
   };
 
