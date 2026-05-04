@@ -7,7 +7,7 @@
   xdg.dataFile.sillytavern-config = {
     enable = true;
     target = "SillyTavern/config.yaml";
-    source = ../config/sillytavern.yaml;
+    source = ./sillytavern.yaml;
   };
 
   services.runit.services.sillytavern = {
