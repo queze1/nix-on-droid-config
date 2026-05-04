@@ -38,7 +38,7 @@ in
         {
           http_port  8080
           https_port 8443
-          acme_dns cloudflare {env.${config.age.secrets.cloudflare-api-token.path}}
+          acme_dns cloudflare {file.${config.age.secrets.cloudflare-api-token.path}}
         }
 
         sillytavern.osipol.uk {
