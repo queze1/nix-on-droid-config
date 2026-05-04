@@ -18,9 +18,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      syncthing
-    ];
+    home.packages = with pkgs; [ syncthing ];
 
     services.runit.services.syncthing = {
       enable = true;

@@ -26,9 +26,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs-unstable; [
-      vaultwarden
-    ];
+    home.packages = with pkgs-unstable; [ vaultwarden ];
 
     services.runit.services.vaultwarden = {
       enable = true;
