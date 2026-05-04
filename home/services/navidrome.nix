@@ -36,7 +36,7 @@ in
 
     xdg.configFile.navidrome-config = {
       enable = true;
-      target = "navidrome/config.yaml";
+      target = "navidrome/config.toml";
       text = ''
         MusicFolder = "${cfg.musicDirectory}"
         DataFolder = "${cfg.dataDirectory}"
