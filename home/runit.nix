@@ -86,6 +86,11 @@ let
       };
     }
     // optionalAttrs svc.log.enable {
+      "runit-${name}-log-keep" = {
+        target = "${logTarget}/.keep";
+        text = "";
+        force = true;
+      };
       "runit-${name}-log-run" = {
         target = "${serviceTarget}/log/run";
         executable = true;
