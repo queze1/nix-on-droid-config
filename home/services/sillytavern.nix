@@ -18,9 +18,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs-unstable; [
-      sillytavern
-    ];
+    home.packages = with pkgs-unstable; [ sillytavern ];
 
     xdg.dataFile.sillytavern-config = {
       enable = true;

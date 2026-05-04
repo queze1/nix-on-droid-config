@@ -18,9 +18,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      cloudflared
-    ];
+    home.packages = with pkgs; [ cloudflared ];
 
     age.secrets.cloudflare-tunnel-token = {
       file = ../../secrets/cloudflare-tunnel-token.age;

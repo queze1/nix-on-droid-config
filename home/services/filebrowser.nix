@@ -20,9 +20,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      filebrowser
-    ];
+    home.packages = with pkgs; [ filebrowser ];
 
     services.runit.services.filebrowser = {
       enable = true;

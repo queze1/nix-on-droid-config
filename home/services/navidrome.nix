@@ -32,9 +32,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      navidrome
-    ];
+    home.packages = with pkgs; [ navidrome ];
 
     xdg.dataFile.navidrome-config = {
       enable = true;
