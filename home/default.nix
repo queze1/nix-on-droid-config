@@ -7,7 +7,7 @@
   imports = [
     ./programs.nix
     ./runit.nix
-    ./services.nix
+    ./services
   ];
 
   home.packages = [
