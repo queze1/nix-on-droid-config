@@ -24,14 +24,6 @@
     identityPaths = [
       "${config.home.homeDirectory}/.ssh/id_ed25519"
     ];
-    secrets = {
-      cloudflare-tunnel-token = {
-        file = ../secrets/cloudflare-tunnel-token.age;
-      };
-      cloudflare-api-token = {
-        file = ../secrets/cloudflare-api-token.age;
-      };
-    };
   };
 
   # Capture agenix systemd and run it as an activation script

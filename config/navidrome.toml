@@ -1,9 +1,0 @@
-## Music library
-MusicFolder = "/data/data/com.termux.nix/files/home/Music"
-
-# Application data
-DataFolder = "/data/data/com.termux.nix/files/home/.local/share/navidrome"
-
-# Server settings
-Address = "0.0.0.0"
-Port = 4533
