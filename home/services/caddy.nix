@@ -11,6 +11,13 @@ let
     ;
 
   cfg = config.services.caddy;
+
+  caddyPkg = pkgs.caddy.withPlugins {
+    plugins = [
+      "github.com/caddy-dns/cloudflare@v0.2.4"
+    ];
+    hash = "sha256-4WF7tIx8d6O/Bd0q9GhMch8lS3nlR5N3Zg4ApA3hrKw=";
+  };
 in
 {
   options.services.caddy = {
@@ -18,14 +25,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      (caddy.withPlugins {
-        plugins = [
-          "github.com/caddy-dns/cloudflare@v0.2.4"
-        ];
-        hash = "sha256-4WF7tIx8d6O/Bd0q9GhMch8lS3nlR5N3Zg4ApA3hrKw=";
-      })
-    ];
+    home.packages = [ caddyPkg ];
 
     age.secrets.cloudflare-api-token = {
       file = ../../secrets/cloudflare-api-token.age;
@@ -66,7 +66,7 @@ in
     services.runit.services.caddy = {
       enable = true;
       run = ''
-        exec ${pkgs.caddy}/bin/caddy run --config ${config.home.homeDirectory}/.config/Caddyfile
+        exec ${caddyPkg}/bin/caddy run --config ${config.home.homeDirectory}/.config/Caddyfile
       '';
     };
   };
