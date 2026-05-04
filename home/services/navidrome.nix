@@ -34,7 +34,7 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ navidrome ];
 
-    xdg.dataFile.navidrome-config = {
+    xdg.configFile.navidrome-config = {
       enable = true;
       target = "navidrome/config.yaml";
       text = ''
