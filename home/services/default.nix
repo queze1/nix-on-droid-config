@@ -15,6 +15,6 @@
   services.filebrowser.enable = true;
   services.navidrome.enable = true;
   services.sillytavern.enable = true;
-  services.syncthing.enable = true;
+  services.syncthing-runit.enable = true;
   services.vaultwarden.enable = true;
 }

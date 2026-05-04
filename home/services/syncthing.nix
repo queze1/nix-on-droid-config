@@ -10,10 +10,10 @@ let
     mkIf
     ;
 
-  cfg = config.services.syncthing;
+  cfg = config.services.syncthing-runit;
 in
 {
-  options.services.syncthing = {
+  options.services.syncthing-runit = {
     enable = mkEnableOption "syncthing";
   };
 
