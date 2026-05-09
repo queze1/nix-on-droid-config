@@ -42,19 +42,35 @@ in
         }
 
         sillytavern.osipol.uk {
-          reverse_proxy localhost:8000
+          @tailscale remote_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
+          handle @tailscale {
+            reverse_proxy localhost:8000
+          }
+          respond "Forbidden" 403
         }
 
         navidrome.osipol.uk {
-          reverse_proxy localhost:4533
+          @tailscale remote_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
+          handle @tailscale {
+            reverse_proxy localhost:4533
+          }
+          respond "Forbidden" 403
         }
 
         vaultwarden.osipol.uk {
-          reverse_proxy localhost:8081
+          @tailscale remote_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
+          handle @tailscale {
+            reverse_proxy localhost:8081
+          }
+          respond "Forbidden" 403
         }
 
         filebrowser.osipol.uk {
-          reverse_proxy localhost:8082
+          @tailscale remote_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
+          handle @tailscale {
+            reverse_proxy localhost:8082
+          }
+          respond "Forbidden" 403
         }
       '';
     };
