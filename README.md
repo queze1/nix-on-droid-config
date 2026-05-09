@@ -1,9 +1,6 @@
 # nix-on-droid-config
 This repository contains my [nix-on-droid](https://github.com/nix-community/nix-on-droid) server configuration. It hosts web apps and exposes them on a custom domain with [Caddy](https://caddyserver.com) and [Cloudflare DNS](https://github.com/caddy-dns/cloudflare).
 
-## Network Diagram
-![A network diagram of this project.](docs/network_diagram.drawio.png)
-
 ## Private Services
 > These subdomains point to a Tailscale IP, so you won't be able to access them on the public internet.
 - [VaultWarden](https://github.com/dani-garcia/vaultwarden) (password manager): https://vaultwarden.osipol.uk:8443
@@ -17,6 +14,16 @@ This repository contains my [nix-on-droid](https://github.com/nix-community/nix-
 - Declarative server configuration using [flakes](https://wiki.nixos.org/wiki/Flakes) and [Home Manager](https://github.com/nix-community/home-manager).
 - File synchronisation with [Syncthing](https://syncthing.net/).
 - Secret management with [agenix](https://github.com/ryantm/agenix).
+
+## Hosts
+
+| Hostname | Model | Android Version | CPU | RAM | Storage |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| poco-x3-pro | Xiaomi Poco X3 Pro | 12 | Octa-core Max 2.96GHz | 8 GB | 256 GB |
+
+
+## Network Diagram
+![A network diagram of this project.](docs/network_diagram.drawio.png)
 
 ## Installation
 
@@ -70,11 +77,4 @@ cd-log-dir
 # Shell script to manage runsvdir
 runit-manager start|stop|status
 ```
-
-
-## Hosts
-
-| Hostname | Model | Android Version | CPU | RAM | Storage |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| poco-x3-pro | Xiaomi Poco X3 Pro | 12 | Octa-core Max 2.96GHz | 8 GB | 256 GB |
 
