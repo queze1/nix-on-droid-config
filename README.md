@@ -52,7 +52,7 @@ cd nix-on-droid-config
 nix-on-droid switch  # may take an hour or more for the first time
 ```
 4. Test if SSH has been configured correctly:
-```
+```bash
 # Use Tailscale DNS or get your device's IP address with `ip addr`
 ssh -p 8022 nix-on-droid@YOUR_PHONE
 ```
@@ -60,7 +60,7 @@ ssh -p 8022 nix-on-droid@YOUR_PHONE
   - Without remote deployment, updating `nixpkgs` can take around 30 minutes in evaluation time (depending on phone specs).
 
 ## Useful Commands
-```
+```bash
 # Run if SSH stopped working
 sshd-start
 
