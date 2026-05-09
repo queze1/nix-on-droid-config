@@ -34,7 +34,7 @@ in
         mkdir -p ${cfg.dataDirectory}
         export DATA_FOLDER="${cfg.dataDirectory}"
         export WEB_VAULT_FOLDER="${pkgs-unstable.vaultwarden-webvault}/share/vaultwarden/vault"
-        export ROCKET_ADDRESS="0.0.0.0"
+        export ROCKET_ADDRESS="127.0.0.1"
         export ROCKET_PORT="8081"
         export SIGNUPS_ALLOWED="false"
         export SHOW_PASSWORD_HINT="false"
