@@ -24,7 +24,7 @@ This repository contains my [nix-on-droid](https://github.com/nix-community/nix-
 3. It can be used without rooting a phone.
 
 ## Why should you NOT use Nix-on-Droid to run a server?
-1. Nix-on-Droid is infrequently maintained and (as of 09/05/2026) uses [NixOS 24.05](https://nixos.org/blog/announcements/2024/nixos-2405/) packages (although this doesn't stop you from using a newer version of Nixpkgs if you want).
+1. [Nix-on-Droid](https://github.com/nix-community/nix-on-droid) is infrequently maintained and (as of 09/05/2026) uses [NixOS 24.05](https://nixos.org/blog/announcements/2024/nixos-2405/) packages (although this doesn't stop you from using a newer version of Nixpkgs if you want).
 2. Nix-on-Droid is not NixOS, and lacks:
     - Inbuilt program options. (e.g. `services.syncthing`)
         - Home Manager program options can be enabled, but they will not autostart without systemd (see below).
@@ -33,7 +33,7 @@ This repository contains my [nix-on-droid](https://github.com/nix-community/nix-
     - Most NixOS options. (see the [Nix-on-Droid manual](https://nix-community.github.io/nix-on-droid/) for a list of all options)
     - The ability to bind to ports lower than 1024 (a limitation common to non-rooted Android phones).
 3. Nix-on-Droid may be unstable on Android 12+ unless you disable the [Phantom Process Killer](https://github.com/atamshkai/Phantom-Process-Killer).
-4. Local evaluation is very slow (up to 30 minutes to evaluate a new version of Nixpkgs), in part of overhead from [PRoot](https://wiki.termux.com/wiki/PRoot).
+4. Local evaluation is very slow (up to 30 minutes to evaluate a new version of Nixpkgs), in part because of overhead from [PRoot](https://wiki.termux.com/wiki/PRoot).
 
 ## Installation
 1. Install [Nix-on-Droid](https://github.com/nix-community/nix-on-droid) on an Android device. Set up with flakes (may take 20-30 minutes).
@@ -65,7 +65,7 @@ nix-on-droid switch  # may take an hour or more for the first time
 ssh -p 8022 nix-on-droid@YOUR_PHONE
 ```
 5. Optional: Set up remote deployment with [deploy-rs](https://github.com/serokell/deploy-rs). ([guide](https://github.com/nix-community/nix-on-droid/wiki/Remote-deploy-with-deploy%E2%80%90rs))
-  - Without remote deployment, updating `nixpkgs` can take around 30 minutes in evaluation time (depending on phone specs).
+    - Without remote deployment, updating `nixpkgs` can take around 30 minutes in evaluation time (depending on phone specs).
 
 ## Useful Commands
 ```bash
