@@ -27,7 +27,7 @@ in
       run = ''
         mkdir -p ${filebrowserDataDirectory}
         exec ${pkgs.filebrowser}/bin/filebrowser \
-          --address 0.0.0.0 \
+          --address 127.0.0.1 \
           --port 8082 \
           --database "${filebrowserDatabase}" \
           --root "${config.services.navidrome.musicDirectory}"
