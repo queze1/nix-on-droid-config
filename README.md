@@ -1,6 +1,9 @@
 # nix-on-droid-config
 This repository contains my [nix-on-droid](https://github.com/nix-community/nix-on-droid) server configuration. It hosts web apps and exposes them on a custom domain with [Caddy](https://caddyserver.com) and [Cloudflare DNS](https://github.com/caddy-dns/cloudflare).
 
+## Network Diagram
+![A network diagram of this project.](docs/network_diagram.drawio.png)
+
 ## Private Services
 > These subdomains point to a Tailscale IP, so you won't be able to access them on the public internet.
 - [VaultWarden](https://github.com/dani-garcia/vaultwarden) (password manager): https://vaultwarden.osipol.uk:8443
