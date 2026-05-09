@@ -61,7 +61,8 @@ ssh -p 8022 nix-on-droid@YOUR_PHONE
 
 ## Useful Commands
 ```bash
-# Run if SSH stopped working
+# Start SSH daemon manually
+# Run if SSH stopped working after a restart or crash
 sshd-start
 
 # Alias to pull changes and rebuild
