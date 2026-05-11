@@ -7,6 +7,7 @@
     # System utils
     curl
     findutils
+    inotify-tools
     git
     iproute2
     nano
