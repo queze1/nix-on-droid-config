@@ -43,8 +43,8 @@ in
         Address = "127.0.0.1"
         Port = 4533
 
-        # Scan every minute
-        Scanner.Schedule = "* * * * *"
+        # Scan every hour
+        Scanner.Schedule = "0 * * * *"
       '';
     };
 
