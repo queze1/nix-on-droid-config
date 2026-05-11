@@ -42,6 +42,9 @@ in
         DataFolder = "${cfg.dataDirectory}"
         Address = "127.0.0.1"
         Port = 4533
+
+        # Scan every minute
+        Scanner.Schedule = "* * * * *"
       '';
     };
 
