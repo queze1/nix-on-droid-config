@@ -1,8 +1,6 @@
 # nix-on-droid-config
-<figure>
-  <img src="docs/photo-09-05-2026.jpg" alt="A photo of a phone running htop using this nix-on-droid config."/>
-  <figcaption>My server running `htop`.</figcaption>
-</figure>
+![A photo of a phone running htop](docs/photo-09-05-2026.jpg)
+*My server running `htop`.*
 
 This repository contains my [nix-on-droid](https://github.com/nix-community/nix-on-droid) server configuration. It hosts web apps on a phone, and exposes them on a custom domain with [Caddy](https://caddyserver.com), [Cloudflare DNS](https://github.com/caddy-dns/cloudflare) and [Tailscale](https://tailscale.com/).
 
