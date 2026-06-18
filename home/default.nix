@@ -2,8 +2,7 @@
   config,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     ./programs.nix
     ./runit.nix
@@ -27,7 +26,7 @@
   };
 
   # Capture agenix systemd and run it as an activation script
-  home.activation.agenix = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.agenix = config.lib.dag.entryAfter ["writeBoundary"] ''
     echo "Decrypting secrets with agenix..."
     run ${builtins.head config.systemd.user.services.agenix.Service.ExecStart}
   '';

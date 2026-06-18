@@ -3,9 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkIf
     ;
@@ -13,14 +13,13 @@ let
   cfg = config.services.filebrowser;
   filebrowserDataDirectory = "${config.home.homeDirectory}/.local/share/filebrowser";
   filebrowserDatabase = "${filebrowserDataDirectory}/filebrowser.db";
-in
-{
+in {
   options.services.filebrowser = {
     enable = mkEnableOption "filebrowser";
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ filebrowser ];
+    home.packages = with pkgs; [filebrowser];
 
     services.runit.services.filebrowser = {
       enable = true;

@@ -3,9 +3,9 @@
   lib,
   pkgs-unstable,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkIf
     mkOption
@@ -13,8 +13,7 @@ let
     ;
 
   cfg = config.services.vaultwarden;
-in
-{
+in {
   options.services.vaultwarden = {
     enable = mkEnableOption "vaultwarden";
 
@@ -26,7 +25,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs-unstable; [ vaultwarden ];
+    home.packages = with pkgs-unstable; [vaultwarden];
 
     services.runit.services.vaultwarden = {
       enable = true;

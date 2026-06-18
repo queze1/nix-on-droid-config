@@ -3,9 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkOption
     types
@@ -54,12 +54,10 @@ let
     esac
   '';
 
-  mkServiceFiles =
-    name: svc:
-    let
-      serviceTarget = "${cfg.serviceDir}/${name}";
-      logTarget = "${cfg.logDir}/${name}";
-    in
+  mkServiceFiles = name: svc: let
+    serviceTarget = "${cfg.serviceDir}/${name}";
+    logTarget = "${cfg.logDir}/${name}";
+  in
     {
       "runit-${name}-run" = {
         target = "${serviceTarget}/run";
@@ -103,8 +101,7 @@ let
         force = true;
       };
     };
-in
-{
+in {
   options.services.runit = {
     enable = mkEnableOption "runit service manager";
 
@@ -123,8 +120,7 @@ in
     services = mkOption {
       type = types.attrsOf (
         types.submodule (
-          { name, ... }:
-          {
+          {name, ...}: {
             options = {
               enable = mkOption {
                 type = types.bool;
@@ -147,7 +143,7 @@ in
           }
         )
       );
-      default = { };
+      default = {};
     };
   };
 
@@ -164,9 +160,9 @@ in
       "cd-log-dir" = "cd ${config.services.runit.logDir}";
     };
 
-    home.packages = [ runit-manager ];
+    home.packages = [runit-manager];
 
-    home.activation.runsvdir = lib.hm.dag.entryAfter [ "installPackages" ] ''
+    home.activation.runsvdir = lib.hm.dag.entryAfter ["installPackages"] ''
       export PATH=$PATH:${pkgs.runit}/bin
       if ! ${pkgs.procps}/bin/pgrep -x runsvdir > /dev/null; then
         echo "Starting runsvdir..."

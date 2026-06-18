@@ -3,22 +3,21 @@
   lib,
   pkgs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkIf
     ;
 
   cfg = config.services.cloudflared;
-in
-{
+in {
   options.services.cloudflared = {
     enable = mkEnableOption "cloudflared";
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ cloudflared ];
+    home.packages = with pkgs; [cloudflared];
 
     age.secrets.cloudflare-tunnel-token = {
       file = ../../secrets/cloudflare-tunnel-token.age;
