@@ -6,6 +6,7 @@ This repository contains my [nix-on-droid](https://github.com/nix-community/nix-
 
 ## Private Services
 > These subdomains point to a Tailscale IP, so you won't be able to access them on the public internet.
+- [Actual Budget](https://github.com/actualbudget/actual) (personal finance app): https://actual.osipol.uk:8443
 - [VaultWarden](https://github.com/dani-garcia/vaultwarden) (password manager): https://vaultwarden.osipol.uk:8443
 - [NaviDrome](https://www.navidrome.org/) (music server): https://navidrome.osipol.uk:8443
 - [SillyTavern](https://docs.sillytavern.app/) (LLM frontend): https://sillytavern.osipol.uk:8443/
