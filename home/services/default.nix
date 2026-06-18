@@ -10,6 +10,7 @@
   ];
   services.runit.enable = true;
 
+  services.actual-server.enable = true;
   services.caddy.enable = true;
   services.cloudflared.enable = false;
   services.filebrowser.enable = true;

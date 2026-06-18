@@ -40,6 +40,10 @@ in {
           acme_dns cloudflare {file.${config.age.secrets.cloudflare-api-token.path}}
         }
 
+        actual.osipol.uk {
+          reverse_proxy localhost:5006
+        }
+
         sillytavern.osipol.uk {
           reverse_proxy localhost:8000
         }
