@@ -32,6 +32,7 @@ in {
       run = ''
         mkdir -p ${cfg.dataDirectory}
         export ACTUAL_DATA_DIR="${cfg.dataDirectory}"
+        export ACTUAL_HOSTNAME="127.0.0.1"
         exec ${pkgs.actual-server}/bin/actual-server
       '';
     };
