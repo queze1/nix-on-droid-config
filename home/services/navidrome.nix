@@ -3,9 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkIf
     mkOption
@@ -13,8 +13,7 @@ let
     ;
 
   cfg = config.services.navidrome;
-in
-{
+in {
   options.services.navidrome = {
     enable = mkEnableOption "navidrome";
 
@@ -32,7 +31,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ navidrome ];
+    home.packages = with pkgs; [navidrome];
 
     xdg.configFile.navidrome-config = {
       enable = true;

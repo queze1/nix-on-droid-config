@@ -3,22 +3,21 @@
   lib,
   pkgs-unstable,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkIf
     ;
 
   cfg = config.services.sillytavern;
-in
-{
+in {
   options.services.sillytavern = {
     enable = mkEnableOption "sillytavern";
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs-unstable; [ sillytavern ];
+    home.packages = with pkgs-unstable; [sillytavern];
 
     xdg.dataFile.sillytavern-config = {
       enable = true;

@@ -3,9 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkIf
     ;
@@ -18,14 +18,13 @@ let
     ];
     hash = "sha256-uKtStb6m1/hA5IaAdIyLGzAQdyIySjISdxXIRxehhyI=";
   };
-in
-{
+in {
   options.services.caddy = {
     enable = mkEnableOption "caddy";
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ caddyPkg ];
+    home.packages = [caddyPkg];
 
     age.secrets.cloudflare-api-token = {
       file = ../../secrets/cloudflare-api-token.age;

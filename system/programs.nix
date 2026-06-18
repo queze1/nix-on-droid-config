@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   environment.packages = with pkgs; [
     # Init manager
     runit

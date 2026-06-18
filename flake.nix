@@ -2,11 +2,11 @@
   description = "Nix-on-Droid server configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -23,41 +23,38 @@
     };
   };
 
-  outputs =
-    inputs@{
-      nixpkgs,
-      nixpkgs-unstable,
-      home-manager,
-      nix-on-droid,
-      ...
-    }:
-    let
-      pkgs = import nixpkgs {
-        system = "aarch64-linux";
-        overlays = [
-          nix-on-droid.overlays.default
-        ];
-      };
-      pkgs-unstable = import nixpkgs-unstable {
-        system = "aarch64-linux";
-        overlays = [
-          nix-on-droid.overlays.default
-        ];
-      };
-    in
-    {
-      nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
-        modules = [
-          ./nix-on-droid.nix
-        ];
-
-        # Set nixpkgs instance
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit inputs pkgs-unstable;
-        };
-
-        home-manager-path = home-manager.outPath;
-      };
+  outputs = inputs @ {
+    nixpkgs,
+    nixpkgs-unstable,
+    home-manager,
+    nix-on-droid,
+    ...
+  }: let
+    pkgs = import nixpkgs {
+      system = "aarch64-linux";
+      overlays = [
+        nix-on-droid.overlays.default
+      ];
     };
+    pkgs-unstable = import nixpkgs-unstable {
+      system = "aarch64-linux";
+      overlays = [
+        nix-on-droid.overlays.default
+      ];
+    };
+  in {
+    nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
+      modules = [
+        ./nix-on-droid.nix
+      ];
+
+      # Set nixpkgs instance
+      inherit pkgs;
+      extraSpecialArgs = {
+        inherit inputs pkgs-unstable;
+      };
+
+      home-manager-path = home-manager.outPath;
+    };
+  };
 }

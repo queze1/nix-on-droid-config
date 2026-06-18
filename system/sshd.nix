@@ -1,10 +1,12 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   sshdDirectory = "${config.user.home}/sshd";
   pubKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINC3vA0PnFXyFRgitP7U8PL+SlTvqvE6eY73rpW5Rj4y andrewh@utm-vm";
   port = 8022;
-in
-{
+in {
   build.activation.sshd = ''
     $DRY_RUN_CMD mkdir $VERBOSE_ARG --parents "${config.user.home}/.ssh"
     $DRY_RUN_CMD echo ${pubKey} > "${config.user.home}/.ssh/authorized_keys"
