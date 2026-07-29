@@ -19,5 +19,6 @@
 
     # CLI tools
     htop
+    rsync
   ];
 }
