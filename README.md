@@ -10,7 +10,7 @@ This repository contains my [nix-on-droid](https://github.com/nix-community/nix-
 - [VaultWarden](https://github.com/dani-garcia/vaultwarden) (password manager): https://vaultwarden.osipol.uk:8443
 - [NaviDrome](https://www.navidrome.org/) (music server): https://navidrome.osipol.uk:8443
 - [SillyTavern](https://docs.sillytavern.app/) (LLM frontend): https://sillytavern.osipol.uk:8443/
-- [File Browser](https://filebrowser.org/) (web file manager): https://filebrowser.osipol.uk:8443
+- [File Browser](https://github.com/filebrowser/filebrowser) (web file manager): https://filebrowser.osipol.uk:8443
 
 ## Highlights
 - Zero Trust networking with [Tailscale](https://tailscale.com/) (via the [Android app](https://play.google.com/store/apps/details?id=com.tailscale.ipn&hl=en_AU&pli=1)).
