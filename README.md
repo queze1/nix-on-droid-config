@@ -1,10 +1,10 @@
 # nix-on-droid-config
-![A photo of a phone running htop](docs/photo-09-05-2026.jpg)
-*My server running `htop`.*
-
   > [!NOTE]
   > This repository is no longer maintained. My self-hosted services now live in my
   [NixOS config](https://github.com/queze1/nixos-config).
+
+![A photo of a phone running htop](docs/photo-09-05-2026.jpg)
+*My server running `htop`.*
 
 This repository contains my [nix-on-droid](https://github.com/nix-community/nix-on-droid) server configuration. It hosts web apps on a phone, and exposes them on a custom domain with [Caddy](https://caddyserver.com), [Cloudflare DNS](https://github.com/caddy-dns/cloudflare) and [Tailscale](https://tailscale.com/).
 
